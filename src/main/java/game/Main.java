@@ -23,6 +23,7 @@ public class Main {
         System.out.println(prova.getFirstCard().getValue());
         System.out.println(prova.getSecondCard().getKey());
         System.out.println(prova.getSecondCard().getValue());
+        System.out.println(prova.getCards());
         prova.closeWeb();
     }
      /*
