@@ -16,7 +16,7 @@ public class WebConnector {
         options.addArguments("--disable-gpu\", \"--window-size=1920,1200\",\"--ignore-certificate-errors");
         driver=new FirefoxDriver(options);
         driver.navigate().to("http://react-poker.surge.sh/");
-        Thread.sleep(20000);
+        Thread.sleep(10000);
     }
     public int getPot()
     {
@@ -112,4 +112,5 @@ public class WebConnector {
     {
         driver.close();
     }
+
 }
