@@ -8,7 +8,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import java.util.ArrayList;
 
 public class WebConnector {
-    ArrayList<Player> players=new ArrayList<Player>();
     WebDriver driver;
     public WebConnector() throws InterruptedException {
 
@@ -17,14 +16,7 @@ public class WebConnector {
         options.addArguments("--disable-gpu\", \"--window-size=1920,1200\",\"--ignore-certificate-errors");
         driver=new FirefoxDriver(options);
         driver.navigate().to("http://react-poker.surge.sh/");
-        Thread.sleep(20000);
-        //aggiungere attesa su controllo
-
-
-        while(!myTurn()){}
-        inizializePlayer();
-        System.out.println(players.get(1).getName());
-
+        Thread.sleep(10000);
     }
     public int getPot()
     {
@@ -120,21 +112,5 @@ public class WebConnector {
     {
         driver.close();
     }
-    public void inizializePlayer() {
-        for (int i = 0; i < 5; i++) {
-            //driver.findElement(By.xpath("//div[@class 'player-entity--wrapper p" +i+ "']/div[@class='player-entity--container']/div/ "))
-            String name = driver.findElement(By.xpath("//div[@class 'player-entity--wrapper p" + i + "']/div[@class='player-entity--container']/div/h5 ")).getText();
-            String pot = driver.findElement(By.xpath("//div[@class 'player-entity--wrapper p" + i + "']/div[@class='player-entity--container']/div/div[@class='player-info--stash--container']/h5")).getText();
-            players.add(new Player(name, pot, i));
-
-        }
-    }
-
-    boolean myTurn(){
-        return driver.findElements( By.xpath("//button[@class='action-button']") ).size()!=0;
-
-    }
-
-
 
 }
