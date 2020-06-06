@@ -13,12 +13,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Driver;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Main {
 
+
+
     public static void main(String[] args) throws InterruptedException, UnsupportedEncodingException {
         WebConnector prova=new WebConnector();
+
         System.out.println(prova.getFirstCard().getKey());
         System.out.println(prova.getFirstCard().getValue());
         System.out.println(prova.getSecondCard().getKey());
