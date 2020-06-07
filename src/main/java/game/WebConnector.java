@@ -2,6 +2,7 @@ package game;
 import javafx.util.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 public class WebConnector {
     ArrayList<Player> players=new ArrayList<Player>();
     WebDriver driver;
+    int maxPlayers=5;
     public WebConnector() throws InterruptedException {
 
         System.setProperty("webdriver.gecko.driver","src/main/resources/geckodriver.exe");
@@ -29,20 +31,20 @@ public class WebConnector {
     public int getPot()
     {
 
-        Integer pot=Integer.parseInt((driver.findElement(By.xpath("//div[@class='pot-container']/h4")).getText()));
+        int pot=Integer.parseInt((driver.findElement(By.xpath("//div[@class='pot-container']/h4")).getText()));
         return pot;
     }
     public ArrayList<Pair<String,String>> getCards()
     {
         ArrayList<Pair<String,String>> cards=new ArrayList<Pair<String,String>>();
-        Boolean notexist=Boolean.FALSE;
-        Integer i=1;
+        boolean notexist=Boolean.FALSE;
+        int i=1;
         do {
 
-            if(driver.findElements( By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[6]/div["+String.valueOf(i)+"]/h6") ).size()!=0)
+            if(driver.findElements( By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[6]/div["+ i +"]/h6") ).size()!=0)
             {
                 Pair<String,String>card = null;
-                String card1=(driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[6]/div["+String.valueOf(i)+"]/h6")).getText());
+                String card1=(driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[6]/div["+ i +"]/h6")).getText());
                 String Number=card1.substring(0,card1.length()-2);
                 if(card1.charAt(card1.length()-1)=='♣'){
                     card=new Pair<String, String>("clubs",Number);
@@ -97,6 +99,8 @@ public class WebConnector {
     {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[2]/div[1]/button[1]")).click();
     }
+
+
     public Pair<String, String> getSecondCard()
     {
         Pair<String,String>card = null;
@@ -116,15 +120,17 @@ public class WebConnector {
         }
         return card;
     }
+
+
     public void closeWeb()
     {
         driver.close();
     }
     public void inizializePlayer() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < maxPlayers; i++) {
             //driver.findElement(By.xpath("//div[@class 'player-entity--wrapper p" +i+ "']/div[@class='player-entity--container']/div/ "))
-            String name = driver.findElement(By.xpath("//div[@class 'player-entity--wrapper p" + i + "']/div[@class='player-entity--container']/div/h5 ")).getText();
-            String pot = driver.findElement(By.xpath("//div[@class 'player-entity--wrapper p" + i + "']/div[@class='player-entity--container']/div/div[@class='player-info--stash--container']/h5")).getText();
+            String name = driver.findElement(By.xpath("//div[@class='player-entity--wrapper p" + i + "']/div[@class='player-entity--container']/div/h5 ")).getText();
+            String pot = driver.findElement(By.xpath("//div[@class='player-entity--wrapper p" + i + "']/div[@class='player-entity--container']/div/div[@class='player-info--stash--container']/h5")).getText();
             players.add(new Player(name, pot, i));
 
         }
@@ -135,6 +141,14 @@ public class WebConnector {
 
     }
 
+    public String dealerName(){
+        for(int i=0;i<maxPlayers;i++){
+            if(driver.findElements(By.xpath("//div[@class='player-entity--wrapper p" + i + "']/div[@class='player-entity--container']/div/div[@class='dealer-chip-icon-container']")).size()==1   )
+                return driver.findElement(By.xpath("//div[@class='player-entity--wrapper p" + i + "']/div[@class='player-entity--container']/div/h5")).getText();
+        }
 
+
+        return "ERROR";
+    }
 
 }

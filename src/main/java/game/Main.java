@@ -12,8 +12,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.UnsupportedEncodingException;
+import java.sql.Array;
 import java.sql.Driver;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class Main {
@@ -21,6 +23,8 @@ public class Main {
 
 
     public static void main(String[] args) throws InterruptedException, UnsupportedEncodingException {
+
+
         WebConnector prova=new WebConnector();
 
         System.out.println(prova.getFirstCard().getKey());
@@ -28,7 +32,9 @@ public class Main {
         System.out.println(prova.getSecondCard().getKey());
         System.out.println(prova.getSecondCard().getValue());
         System.out.println(prova.getCards());
-        prova.closeWeb();
+
+        System.out.println(prova.dealerName());
+       // prova.closeWeb();
     }
      /*
             WebElement slider= (driver.findElement(By.xpath("//div[@class='slider-handles']/div")));
