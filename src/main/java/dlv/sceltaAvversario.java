@@ -7,8 +7,10 @@ import it.unical.mat.embasp.languages.Param;
 public class sceltaAvversario {
 
     @Param(0)
-    private String scelta;
     private String name;
+    @Param(1)
+    private String scelta;
+
     public sceltaAvversario() {
     }
 

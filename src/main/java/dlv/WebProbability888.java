@@ -1,8 +1,6 @@
 package dlv;
 import javafx.util.Pair;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -101,5 +99,15 @@ public class WebProbability888 {
         clickAndCheckPopup(By.id("reset-poker-table-desktop"));
         new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.id("reset-confirm-btn")));
         clickAndCheckPopup(By.id("reset-confirm-btn"));
+    }
+    public void delete(int pos)
+    {
+     /*   new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"player-listing\"]/div["+String.valueOf(pos)+"]")));
+        if(driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div["+String.valueOf(pos)+"]")).getAttribute("data-status").equals("active")) {
+            WebElement elm =driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div[\"++String.valueOf(pos)+\"]/div[1]"));
+
+            METODO DEL CAZZO
+
+        }*/
     }
 }
