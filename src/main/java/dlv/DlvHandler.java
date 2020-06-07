@@ -14,7 +14,7 @@ public class DlvHandler {
     protected Handler handler;
     public DlvHandler()
     {
-        handler=new DesktopHandler((new DLV2DesktopService(("src/main/resources/dlv2.win.x64_5"))));
+        handler=new DesktopHandler((new DLV2DesktopService(("src/main/resources/dlv2.exe"))));
         try{
             ASPMapper.getInstance().registerClass(Scelta.class);
         }
