@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -100,7 +101,8 @@ public class WebProbability888 {
         new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.id("reset-confirm-btn")));
         clickAndCheckPopup(By.id("reset-confirm-btn"));
     }
-    public void delete(int pos)
+    //elimina sempre il primo avversario che si ritrova
+    public void deletefirst()
     {
      /*   new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"player-listing\"]/div["+String.valueOf(pos)+"]")));
         if(driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div["+String.valueOf(pos)+"]")).getAttribute("data-status").equals("active")) {
@@ -109,5 +111,12 @@ public class WebProbability888 {
             METODO DEL CAZZO
 
         }*/
+        WebElement el = driver.findElement(By.cssSelector("#player-win-1 > span.stat"));
+        Actions builder = new Actions(driver);
+        builder.moveToElement(el).click(el);
+        builder.perform();
+        new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"player-listing\"]/div[2]/div[2]")));
+        WebElement element=driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div[2]/div[2]"));
+        element.click();
     }
-}
+}//*[@id="player-listing"]/div[3]/div[2]

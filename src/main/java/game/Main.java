@@ -16,9 +16,10 @@ public class Main {
         System.out.println(prova.getCards());
         prova.closeWeb();*/
         WebProbability888 prob=new WebProbability888();
-        prob.delete(2);
-        Thread.sleep(1000);
-        prob.setAvversario(3);
+        prob.deletefirst();
+        prob.deletefirst();
+        Thread.sleep(10000);
+       /* prob.setAvversario(3);
         Pair<String,String> cardp1=new Pair<String, String>("hearts","9");
         Pair<String,String> cardp2=new Pair<String, String>("clubs","9");
         prob.setPlayerCards(cardp1,cardp2);
@@ -29,7 +30,7 @@ public class Main {
         prob.setcards(card1,2);
         prob.setcards(card2,3);
         System.out.println(prob.GetProbabilityVictory());
-        prob.resetTable();
+        prob.resetTable();*/
         prob.closeWeb();
     }
      /*
