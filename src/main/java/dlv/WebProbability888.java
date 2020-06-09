@@ -16,25 +16,25 @@ public class WebProbability888 {
     public WebProbability888() throws InterruptedException {
         System.setProperty("webdriver.gecko.driver","src/main/resources/geckodriver.exe");
         FirefoxOptions options=new FirefoxOptions();
-        options.addArguments("--disable-gpu\", \"--window-size=1920,1200\",\"--ignore-certificate-errors");
+        options.addArguments("--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--headless","focus" ,"--disable-infobars", "--disable-extensions");
         driver=new FirefoxDriver(options);
         driver.navigate().to("https://www.888poker.com/poker/poker-odds-calculator");
-        Thread.sleep(10000);
+        driver.manage().window().fullscreen();
     }
     public void setAvversario(int N)//l'avversario rientra nel turno attuale
     {
         int player=N;
-        driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div["+String.valueOf(player)+"]/div[3]/p")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/section/div/div[4]/div/div/div/article/div/div/div/div/div/section[1]/div[2]/div["+String.valueOf(player)+"]/div[3]/p")).click();
     }
     public int GetProbabilityVictory()
     {
-        String value=driver.findElement(By.xpath("//*[@id=\"player-win-0\"]/span[2]")).getText();
+        String value=driver.findElement(By.xpath("/html/body/div[1]/section/div/div[4]/div/div/div/article/div/div/div/div/div/section[1]/div[2]/div[1]/div[3]/div[2]/p[1]/span[2]")).getText();
         return (int) Float.parseFloat(value.substring(0,value.length()-1));
     }
     public void setcards(Pair<String,String> card,int poscard)
     {
-        new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"poker-table\"]/ul/li["+String.valueOf(poscard)+"]/div/div/div[2]")));
-        clickAndCheckPopup(By.xpath("//*[@id=\"poker-table\"]/ul/li["+String.valueOf(poscard)+"]/div/div/div[2]"));
+        new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/section/div/div[4]/div/div/div/article/div/div/div/div/div/section[1]/div[1]/div/div/ul/li["+String.valueOf(poscard)+"]/div/div/div[2]")));
+        clickAndCheckPopup(By.xpath("/html/body/div[1]/section/div/div[4]/div/div/div/article/div/div/div/div/div/section[1]/div[1]/div/div/ul/li["+String.valueOf(poscard)+"]/div/div/div[2]"));
         putCard(card);
         new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.id("card-selection-complete")));
         clickAndCheckPopup(By.id("card-selection-complete"));
@@ -60,9 +60,8 @@ public class WebProbability888 {
             seed=4;
         }
         //da aggiustare il fatto che per come e ora non possiamo inserire numeri a meno di if
-        new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"card-selection-table\"]/div[1]/div["+String.valueOf(seed)+"]/a["+String.valueOf(card.getValue())+"]/span")));
-        clickAndCheckPopup(By.xpath("//*[@id=\"card-selection-table\"]/div[1]/div["+String.valueOf(seed)+"]/a["+String.valueOf(number)+"]/span"));
-
+        new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/section/div/div[4]/div/div/div/article/div/div/div/div/div/section[2]/div[2]/div[1]/div["+String.valueOf(seed)+"]/a["+String.valueOf(number)+"]/span")));
+        clickAndCheckPopup(By.xpath("/html/body/div[1]/section/div/div[4]/div/div/div/article/div/div/div/div/div/section[2]/div[2]/div[1]/div["+String.valueOf(seed)+"]/a["+String.valueOf(number)+"]/span"));
     }
     public void setPlayerCards(Pair<String,String>card1, Pair<String,String>card2) {
         new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"player-listing\"]/div[1]/div[3]/div[1]/div[1]/div/div/div[2]")));
@@ -104,19 +103,13 @@ public class WebProbability888 {
     //elimina sempre il primo avversario che si ritrova
     public void deletefirst()
     {
-     /*   new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"player-listing\"]/div["+String.valueOf(pos)+"]")));
-        if(driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div["+String.valueOf(pos)+"]")).getAttribute("data-status").equals("active")) {
-            WebElement elm =driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div[\"++String.valueOf(pos)+\"]/div[1]"));
-
-            METODO DEL CAZZO
-
-        }*/
-        WebElement el = driver.findElement(By.cssSelector("#player-win-1 > span.stat"));
+        new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.player--single:nth-child(2)  ")));
+        WebElement el = driver.findElement(By.cssSelector("div.player--single:nth-child(2) "));
         Actions builder = new Actions(driver);
         builder.moveToElement(el).click(el);
         builder.perform();
-        new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"player-listing\"]/div[2]/div[2]")));
-        WebElement element=driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div[2]/div[2]"));
-        element.click();
+        new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.cssSelector("#player-listing > div:nth-child(2) > div.player--edit.player--edit-right   ")));
+        WebElement el1 = driver.findElement(By.cssSelector("#player-listing > div:nth-child(2) > div.player--edit.player--edit-right   "));
+        el1.click();
     }
-}//*[@id="player-listing"]/div[3]/div[2]
+}
