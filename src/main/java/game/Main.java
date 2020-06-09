@@ -22,8 +22,10 @@ public class Main {
         Thread.sleep(10000);
        */
         WebConnector driver=new WebConnector();
-        System.out.println(driver.getSecondCard());
-        System.out.println(driver.getFirstCard());
+        while(true){
+            System.out.println(driver.getActualStateOfTheGame());
+            Thread.sleep(1500);
+        }
 
        /* prob.setAvversario(3);
 

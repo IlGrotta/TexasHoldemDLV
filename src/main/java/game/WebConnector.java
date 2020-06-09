@@ -17,6 +17,9 @@ public class WebConnector {
         driver=new FirefoxDriver(options);
         driver.navigate().to("http://react-poker.surge.sh/");
         //Thread.sleep(10000);
+        while(!myTurn()){
+            //ONLY FIRST TIME; SO THE GAME IS LOADED! TODO A BETTER SOLUTION
+        }
     }
     public int getPot()
     {
@@ -26,6 +29,9 @@ public class WebConnector {
     }
     public ArrayList<Pair<String,String>> getCards()
     {
+        while(!myTurn()){
+            //ONLY FIRST TIME; SO THE GAME IS LOADED! TODO A BETTER SOLUTION
+        }
         ArrayList<Pair<String,String>> cards=new ArrayList<Pair<String,String>>();
         Boolean notexist=Boolean.FALSE;
         Integer i=1;
