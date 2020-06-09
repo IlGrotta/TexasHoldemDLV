@@ -26,3 +26,11 @@ Per andare al turno successivo:
 
 -Sapere Budget attuale
  String pot= driver.findElement(By.xpath("//div[@class='player-info--stash--container']/h5")).getText();
+
+
+
+//carte sono "playing-card", animation-delay: 1000ms;
+script = 'document.styleSheets[0].insertRule("button:focus {background-color: red !important;}", 0 )'
+driver.executeScript(script);
+
+

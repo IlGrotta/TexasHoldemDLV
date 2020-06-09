@@ -15,11 +15,18 @@ public class Main {
         System.out.println(prova.getSecondCard().getValue());
         System.out.println(prova.getCards());
         prova.closeWeb();*/
+        /*
         WebProbability888 prob=new WebProbability888();
         prob.deletefirst();
-        prob.deletefirst();
+
         Thread.sleep(10000);
+       */
+        WebConnector driver=new WebConnector();
+        System.out.println(driver.getSecondCard());
+        System.out.println(driver.getFirstCard());
+
        /* prob.setAvversario(3);
+
         Pair<String,String> cardp1=new Pair<String, String>("hearts","9");
         Pair<String,String> cardp2=new Pair<String, String>("clubs","9");
         prob.setPlayerCards(cardp1,cardp2);
@@ -31,7 +38,7 @@ public class Main {
         prob.setcards(card2,3);
         System.out.println(prob.GetProbabilityVictory());
         prob.resetTable();*/
-        prob.closeWeb();
+
     }
      /*
             WebElement slider= (driver.findElement(By.xpath("//div[@class='slider-handles']/div")));

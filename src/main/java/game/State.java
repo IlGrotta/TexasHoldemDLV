@@ -23,6 +23,7 @@ public abstract class State {
     protected static int numRound = 0;
     protected static int numPhases = 0;
     static
+
     {
         behaviour=new ArrayList<HashMap<String, Integer>>();
         for(int i=0;i<4;i++)
@@ -47,7 +48,7 @@ public abstract class State {
     }
     protected boolean Algorithm(String dealer) throws InterruptedException {
         boolean myTurn;
-        Boolean existPlayer;
+        boolean existPlayer;
         do{
             do{
 
@@ -56,7 +57,7 @@ public abstract class State {
 
             WebElement slider= (driver.findElement(By.xpath("//div[@class='slider-handles']/div")));
             Actions move=new Actions(driver);
-            Action action=(Action) move.dragAndDropBy(slider,300    ,0).build();
+            Action action= move.dragAndDropBy(slider,300    ,0).build();
             action.perform();
             Thread.sleep(1000);
             driver.findElement(By.xpath("//button[@class='action-button']")).click();
