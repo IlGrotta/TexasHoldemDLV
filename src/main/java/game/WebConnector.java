@@ -1,4 +1,5 @@
 package game;
+import dlv.Card;
 import javafx.util.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,32 +25,50 @@ public class WebConnector {
         Integer pot=Integer.parseInt((driver.findElement(By.xpath("//div[@class='pot-container']/h4")).getText()));
         return pot;
     }
-    public ArrayList<Pair<String,String>> getCards()
+    public ArrayList<Card> getCards()
     {
-        ArrayList<Pair<String,String>> cards=new ArrayList<Pair<String,String>>();
+        ArrayList<Card> cards=new ArrayList<Card>();
         Boolean notexist=Boolean.FALSE;
         Integer i=1;
         do {
 
             if(driver.findElements( By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[6]/div["+String.valueOf(i)+"]/h6") ).size()!=0)
             {
-                Pair<String,String>card = null;
+                Card card = null;
                 String card1=(driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[6]/div["+String.valueOf(i)+"]/h6")).getText());
                 String Number=card1.substring(0,card1.length()-2);
+                Integer num=Integer.parseInt(Number);
+                if(!(num>=2 && num<=10)){
+                    if(Number.equals("J")){
+                        num=11;
+                    }
+                    if(Number.equals("Q")){
+                        num=12;
+
+                    }
+                    if(Number.equals("K")){
+                        num=13;
+
+                    }
+                    if(Number.equals("A")){
+                        num=14;
+
+                    }
+                }
                 if(card1.charAt(card1.length()-1)=='♣'){
-                    card=new Pair<String, String>("clubs",Number);
+                    card=new Card("clubs",num);
                     cards.add(card);
                 }
                 if(card1.charAt(card1.length()-1)=='♠'){
-                    card=new Pair<String, String>("diamonds",Number);
+                    card=new Card("diamonds",num);
                     cards.add(card);
                 }
                 if(card1.charAt(card1.length()-1)=='♦'){
-                    card=new Pair<String, String>("spades",Number);
+                    card=new Card("spades",num);
                     cards.add(card);
                 }
                 if(card1.charAt(card1.length()-1)=='♥'){
-                    card=new Pair<String, String>("hearts",Number);
+                    card=new Card("hearts",num);
                     cards.add(card);
                 }
             }
@@ -61,22 +80,40 @@ public class WebConnector {
         }while (!notexist);
         return cards;
     }
-    public Pair<String, String> getFirstCard()
+    public Card getFirstCard()
     {
-        Pair<String,String>card = null;
+        Card card = null;
         String card1=(driver.findElement(By.xpath("//div[@class='player-entity--wrapper p0']/div[2]/div[1]/h6")).getText());
         String Number=card1.substring(0,card1.length()-2);
+        Integer num=Integer.parseInt(Number);
+        if(!(num>=2 && num<=10)){
+            if(Number.equals("J")){
+                num=11;
+            }
+            if(Number.equals("Q")){
+                num=12;
+
+            }
+            if(Number.equals("K")){
+                num=13;
+
+            }
+            if(Number.equals("A")){
+                num=14;
+
+            }
+        }
         if(card1.charAt(card1.length()-1)=='♣'){
-            card=new Pair<String, String>("clubs",Number);
+            card=new Card("clubs",num);
         }
         if(card1.charAt(card1.length()-1)=='♠'){
-            card=new Pair<String, String>("diamonds",Number);
+            card=new Card("diamonds",num);
         }
         if(card1.charAt(card1.length()-1)=='♦'){
-            card=new Pair<String, String>("spades",Number);
+            card=new Card("spades",num);
         }
         if(card1.charAt(card1.length()-1)=='♥'){
-            card=new Pair<String, String>("hearts",Number);
+            card=new Card("hearts",num);
         }
         return card;
     }
@@ -89,22 +126,40 @@ public class WebConnector {
     {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[2]/div[1]/button[1]")).click();
     }
-    public Pair<String, String> getSecondCard()
+    public Card getSecondCard()
     {
-        Pair<String,String>card = null;
+        Card card = null;
         String card1=(driver.findElement(By.xpath("//div[@class='player-entity--wrapper p0']/div[2]/div[2]/h6")).getText());
         String Number=card1.substring(0,card1.length()-2);
+        Integer num=Integer.parseInt(Number);
+        if(!(num>=2 && num<=10)){
+            if(Number.equals("J")){
+                num=11;
+            }
+            if(Number.equals("Q")){
+                num=12;
+
+            }
+            if(Number.equals("K")){
+                num=13;
+
+            }
+            if(Number.equals("A")){
+                num=14;
+
+            }
+        }
         if(card1.charAt(card1.length()-1)=='♣'){
-            card=new Pair<String, String>("clubs",Number);
+            card=new Card("clubs",num);
         }
         if(card1.charAt(card1.length()-1)=='♠'){
-            card=new Pair<String, String>("diamonds",Number);
+            card=new Card("diamonds",num);
         }
         if(card1.charAt(card1.length()-1)=='♦'){
-            card=new Pair<String, String>("spades",Number);
+            card=new Card("spades",num);
         }
         if(card1.charAt(card1.length()-1)=='♥'){
-            card=new Pair<String, String>("hearts",Number);
+            card=new Card("hearts",num);
         }
         return card;
     }
