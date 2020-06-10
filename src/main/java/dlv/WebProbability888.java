@@ -9,18 +9,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-        import javafx.util.Pair;
-        import org.openqa.selenium.*;
-        import org.openqa.selenium.chrome.ChromeDriver;
-        import org.openqa.selenium.chrome.ChromeOptions;
-        import org.openqa.selenium.firefox.FirefoxDriver;
-        import org.openqa.selenium.firefox.FirefoxOptions;
-        import org.openqa.selenium.interactions.Actions;
-        import org.openqa.selenium.support.ui.ExpectedConditions;
-        import org.openqa.selenium.support.ui.WebDriverWait;
-
-        import javax.smartcardio.Card;
-
+import dlv.Card;
 public class WebProbability888 {
     private WebDriver driver;
     public WebProbability888() throws InterruptedException {
@@ -41,7 +30,7 @@ public class WebProbability888 {
         String value=driver.findElement(By.xpath("//*[@id=\"player-win-0\"]/span[2]")).getText();
         return (int) Float.parseFloat(value.substring(0,value.length()-1));
     }
-    public void setcards(Pair<String,String> card, int poscard)
+    public void setcards(dlv.Card card, int poscard)
     {
         new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"poker-table\"]/ul/li["+String.valueOf(poscard)+"]/div/div/div[2]")));
         clickAndCheckPopup(By.xpath("//*[@id=\"poker-table\"]/ul/li["+String.valueOf(poscard)+"]/div/div/div[2]"));
@@ -49,32 +38,32 @@ public class WebProbability888 {
         new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.id("card-selection-complete")));
         clickAndCheckPopup(By.id("card-selection-complete"));
     }
-    private void putCard(Pair<String,String>card)
+    private void putCard(dlv.Card card)
     {
-        int number=Integer.parseInt(card.getValue())-1;
+        int number=card.getNumber()-1;
         int seed=0;
-        if(card.getKey().equals("clubs"))
+        if(card.getSeed().equals("clubs"))
         {
             seed=1;
         }
-        if(card.getKey().equals("diamonds"))
+        if(card.getSeed().equals("diamonds"))
         {
             seed=2;
         }
-        if(card.getKey().equals("spades"))
+        if(card.getSeed().equals("spades"))
         {
             seed=3;
         }
-        if(card.getKey().equals("hearts"))
+        if(card.getSeed().equals("hearts"))
         {
             seed=4;
         }
         //da aggiustare il fatto che per come e ora non possiamo inserire numeri a meno di if
-        new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"card-selection-table\"]/div[1]/div["+String.valueOf(seed)+"]/a["+String.valueOf(card.getValue())+"]/span")));
+        new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"card-selection-table\"]/div[1]/div["+String.valueOf(seed)+"]/a["+String.valueOf(number)+"]/span")));
         clickAndCheckPopup(By.xpath("//*[@id=\"card-selection-table\"]/div[1]/div["+String.valueOf(seed)+"]/a["+String.valueOf(number)+"]/span"));
 
     }
-    public void setPlayerCards(Pair<String,String>card1, Pair<String,String>card2) {
+    public void setPlayerCards(Card card1, Card card2) {
         new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"player-listing\"]/div[1]/div[3]/div[1]/div[1]/div/div/div[2]")));
         clickAndCheckPopup(By.xpath("//*[@id=\"player-listing\"]/div[1]/div[3]/div[1]/div[1]/div/div/div[2]"));
         putCard(card1);

@@ -1,5 +1,6 @@
 package game;
 
+import dlv.Card;
 import javafx.util.Pair;
 
 import java.io.UnsupportedEncodingException;
@@ -19,12 +20,12 @@ public class Main {
         prob.deletefirst();
         prob.setAvversario(2);
         prob.setAvversario(3);
-        Pair<String,String> cardp1=new Pair<String, String>("hearts","9");
-        Pair<String,String> cardp2=new Pair<String, String>("clubs","9");
+        Card cardp1=new Card("hearts",9);
+        Card cardp2=new Card("clubs",9);
         prob.setPlayerCards(cardp1,cardp2);
-        Pair<String,String> card=new Pair<String, String>("diamonds","9");
-        Pair<String,String> card1=new Pair<String, String>("clubs","3");
-        Pair<String,String> card2=new Pair<String, String>("hearts","3");
+        Card card=new Card("diamonds",9);
+        Card card1=new Card("clubs",3);
+        Card card2=new Card("hearts",3);
         prob.setcards(card,1);
         prob.setcards(card1,2);
         prob.setcards(card2,3);
