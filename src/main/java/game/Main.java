@@ -1,11 +1,8 @@
 package game;
-
-import dlv.Card;
+import dlv.*;
 import javafx.util.Pair;
-
 import java.io.UnsupportedEncodingException;
 
-import  dlv.WebProbability888;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException, UnsupportedEncodingException {
@@ -16,7 +13,7 @@ public class Main {
         System.out.println(prova.getSecondCard().getValue());
         System.out.println(prova.getCards());
         prova.closeWeb();*/
-        WebProbability888 prob=new WebProbability888();
+       /* WebProbability888 prob=new WebProbability888();
         prob.deletefirst();
         prob.setAvversario(2);
         prob.setAvversario(3);
@@ -29,9 +26,22 @@ public class Main {
         prob.setcards(card,1);
         prob.setcards(card1,2);
         prob.setcards(card2,3);
-        System.out.println(prob.GetProbabilityVictory());
-        prob.resetTable();
-        prob.closeWeb();
+        System.out.println(prob.GetProbabilityVictory());*/
+        Budget b=new Budget(5000);
+        numeroAvversari numeroAvversari=new numeroAvversari(2);
+        ProbabilitaVittoria probabilitaVittoria=new ProbabilitaVittoria(80);
+        puntataMinima puntataMinima=new puntataMinima(300);
+        sceltaAvversario sceltaAvversario=new sceltaAvversario("ciccio","call");
+        sceltaAvversario sceltaAvversario1=new sceltaAvversario("pasticcio","raise");
+        DlvChoice dlv=new DlvChoice();
+        dlv.setBudget(b);
+        dlv.setChanceWin(probabilitaVittoria);
+        dlv.setNumeroAvversari(numeroAvversari);
+        dlv.puntataMinima(puntataMinima);
+        dlv.setSceltaAvversario(sceltaAvversario);
+        dlv.setSceltaAvversario(sceltaAvversario1);
+        String result=dlv.runProgram();
+        System.out.println(result);
     }
      /*
             WebElement slider= (driver.findElement(By.xpath("//div[@class='slider-handles']/div")));

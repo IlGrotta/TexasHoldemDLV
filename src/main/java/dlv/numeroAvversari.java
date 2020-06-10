@@ -2,7 +2,7 @@ package dlv;
 import it.unical.mat.embasp.languages.Id;
 import it.unical.mat.embasp.languages.Param;
 
-@Id("Avversari")
+@Id("avversari")
 public class numeroAvversari {
 
     @Param(0)

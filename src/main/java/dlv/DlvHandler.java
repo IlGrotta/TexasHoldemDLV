@@ -7,19 +7,22 @@ import it.unical.mat.embasp.languages.asp.ASPMapper;
 import it.unical.mat.embasp.languages.asp.AnswerSet;
 import it.unical.mat.embasp.languages.asp.AnswerSets;
 import it.unical.mat.embasp.platforms.desktop.DesktopHandler;
-import it.unical.mat.embasp.specializations.dlv.desktop.DLVDesktopService;
 import it.unical.mat.embasp.specializations.dlv2.desktop.DLV2DesktopService;
+
 public class DlvHandler {
     protected String encodingResource;
     protected Handler handler;
     public DlvHandler()
     {
-        handler=new DesktopHandler((new DLV2DesktopService(("src/main/resources/dlv2.exe"))));
+        handler=new DesktopHandler(new DLV2DesktopService("src/main/resources/dlv2.exe"));
+        setProgram("src/main/resources/firstIA.txt");
+
         try{
             ASPMapper.getInstance().registerClass(Scelta.class);
         }
         catch (Exception e)
         {
+
             e.printStackTrace();
         }
     }
@@ -30,8 +33,9 @@ public class DlvHandler {
         InputProgram program=new ASPInputProgram();
         program.addFilesPath(encodingResource);
         handler.addProgram(program);
+
     }
-    private String runProgram()
+    public String runProgram()
     {
         Output o=handler.startSync();
         AnswerSets answers=(AnswerSets)o;

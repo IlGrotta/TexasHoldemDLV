@@ -44,4 +44,22 @@ public class DlvChoice extends DlvHandler{
         }
         handler.addProgram(facts);
     }
+    public void setNumeroAvversari(numeroAvversari numeroAvversari) {
+        InputProgram facts= new ASPInputProgram();
+        try {
+            facts.addObjectInput(numeroAvversari);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        handler.addProgram(facts);
+    }
+    public void puntataMinima(puntataMinima puntataMinima) {
+        InputProgram facts= new ASPInputProgram();
+        try {
+            facts.addObjectInput(puntataMinima);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        handler.addProgram(facts);
+    }
 }
