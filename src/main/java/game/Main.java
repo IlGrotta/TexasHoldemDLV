@@ -16,7 +16,10 @@ public class Main {
         System.out.println(prova.getSecondCard().getValue());
         System.out.println(prova.getCards());
         prova.closeWeb();*/
-        WebProbability888 prob=new WebProbability888();
+        WebConnector con=new WebConnector();
+        System.out.println(con.setNumPlayers());
+        System.out.println(con.getPlayerBudget());
+        /*WebProbability888 prob=new WebProbability888();
         prob.deletefirst();
         prob.setAvversario(2);
         prob.setAvversario(3);
@@ -31,7 +34,7 @@ public class Main {
         prob.setcards(card2,3);
         System.out.println(prob.GetProbabilityVictory());
         prob.resetTable();
-        prob.closeWeb();
+        prob.closeWeb();*/
     }
      /*
             WebElement slider= (driver.findElement(By.xpath("//div[@class='slider-handles']/div")));
