@@ -1,25 +1,35 @@
 package dlv;
 import javafx.util.Pair;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+        import javafx.util.Pair;
+        import org.openqa.selenium.*;
+        import org.openqa.selenium.chrome.ChromeDriver;
+        import org.openqa.selenium.chrome.ChromeOptions;
+        import org.openqa.selenium.firefox.FirefoxDriver;
+        import org.openqa.selenium.firefox.FirefoxOptions;
+        import org.openqa.selenium.interactions.Actions;
+        import org.openqa.selenium.support.ui.ExpectedConditions;
+        import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.smartcardio.Card;
+        import javax.smartcardio.Card;
 
 public class WebProbability888 {
     private WebDriver driver;
     public WebProbability888() throws InterruptedException {
         System.setProperty("webdriver.gecko.driver","src/main/resources/geckodriver.exe");
         FirefoxOptions options=new FirefoxOptions();
-        options.addArguments("--disable-gpu\", \"--window-size=1920,1200\",\"--ignore-certificate-errors");
+        options.addArguments("--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--headless", "--disable-infobars", "--disable-extensions");
         driver=new FirefoxDriver(options);
         driver.navigate().to("https://www.888poker.com/poker/poker-odds-calculator");
-        Thread.sleep(10000);
+        driver.manage().window().fullscreen();
     }
     public void setAvversario(int N)//l'avversario rientra nel turno attuale
     {
@@ -31,7 +41,7 @@ public class WebProbability888 {
         String value=driver.findElement(By.xpath("//*[@id=\"player-win-0\"]/span[2]")).getText();
         return (int) Float.parseFloat(value.substring(0,value.length()-1));
     }
-    public void setcards(Pair<String,String> card,int poscard)
+    public void setcards(Pair<String,String> card, int poscard)
     {
         new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"poker-table\"]/ul/li["+String.valueOf(poscard)+"]/div/div/div[2]")));
         clickAndCheckPopup(By.xpath("//*[@id=\"poker-table\"]/ul/li["+String.valueOf(poscard)+"]/div/div/div[2]"));
@@ -107,9 +117,7 @@ public class WebProbability888 {
      /*   new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"player-listing\"]/div["+String.valueOf(pos)+"]")));
         if(driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div["+String.valueOf(pos)+"]")).getAttribute("data-status").equals("active")) {
             WebElement elm =driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div[\"++String.valueOf(pos)+\"]/div[1]"));
-
             METODO DEL CAZZO
-
         }*/
         WebElement el = driver.findElement(By.cssSelector("#player-win-1 > span.stat"));
         Actions builder = new Actions(driver);
@@ -119,4 +127,5 @@ public class WebProbability888 {
         WebElement element=driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div[2]/div[2]"));
         element.click();
     }
-}//*[@id="player-listing"]/div[3]/div[2]
+}
+
