@@ -13,7 +13,7 @@ public class Main {
         System.out.println(prova.getSecondCard().getValue());
         System.out.println(prova.getCards());
         prova.closeWeb();*/
-       /* WebProbability888 prob=new WebProbability888();
+        WebProbability888 prob=new WebProbability888();
         prob.deletefirst();
         prob.setAvversario(2);
         prob.setAvversario(3);
@@ -26,10 +26,9 @@ public class Main {
         prob.setcards(card,1);
         prob.setcards(card1,2);
         prob.setcards(card2,3);
-        System.out.println(prob.GetProbabilityVictory());*/
         Budget b=new Budget(500);
         numeroAvversari numeroAvversari=new numeroAvversari(2);
-        ProbabilitaVittoria probabilitaVittoria=new ProbabilitaVittoria(80);
+        ProbabilitaVittoria probabilitaVittoria=new ProbabilitaVittoria(prob.GetProbabilityVictory());
         puntataMinima puntataMinima=new puntataMinima(300);
         sceltaAvversario sceltaAvversario=new sceltaAvversario("ciccio","call");
         sceltaAvversario sceltaAvversario1=new sceltaAvversario("pasticcio","call");
@@ -43,6 +42,7 @@ public class Main {
         dlv.setSceltaAvversario(sceltaAvversario1);
         String result=dlv.runProgram();
         System.out.println(result);
+        prob.closeWeb();
     }
      /*
             WebElement slider= (driver.findElement(By.xpath("//div[@class='slider-handles']/div")));
