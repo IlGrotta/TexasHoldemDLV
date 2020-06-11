@@ -1,5 +1,4 @@
 package dlv;
-import javafx.util.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;

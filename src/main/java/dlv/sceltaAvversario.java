@@ -14,7 +14,7 @@ public class sceltaAvversario {
     public sceltaAvversario() {
     }
 
-    public sceltaAvversario(String scelta,String name) {this.name=name;this.scelta = scelta;
+    public sceltaAvversario(String name,String scelta) {this.name=name;this.scelta = scelta;
     }
     public String getName() {
         return name;
@@ -28,7 +28,7 @@ public class sceltaAvversario {
         return scelta;
     }
 
-    public void setRaise(String raise) {
+    public void setScelta(String scelta) {
         this.scelta = scelta;
     }
 }

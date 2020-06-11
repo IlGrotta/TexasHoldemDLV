@@ -14,8 +14,8 @@ public class DlvHandler {
     protected Handler handler;
     public DlvHandler()
     {
-        handler=new DesktopHandler(new DLV2DesktopService("src/main/resources/dlv2.exe"));
-        setProgram("src/main/resources/firstIA.txt");
+        handler = new DesktopHandler(new DLV2DesktopService("src/main/resources/dlv2.exe"));
+        setProgram("src/main/resources/first.txt");
 
         try{
             ASPMapper.getInstance().registerClass(Scelta.class);
@@ -39,6 +39,7 @@ public class DlvHandler {
     {
         Output o=handler.startSync();
         AnswerSets answers=(AnswerSets)o;
+        System.out.println(o.getErrors());
         int n=0;
         for(AnswerSet a: answers.getAnswersets())
         {

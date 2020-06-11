@@ -15,6 +15,7 @@ public class DlvChoice extends DlvHandler{
     }
     public void setChanceWin(ProbabilitaVittoria probabilita)
     {
+
         InputProgram facts=new ASPInputProgram();
         try{
             facts.addObjectInput(probabilita);
@@ -25,38 +26,38 @@ public class DlvChoice extends DlvHandler{
         }
         handler.addProgram(facts);
     }
-    public void setPrezzoCall(PrezzoCall prezzoCall) {
+    public void setPrezzoCall(PrezzoCall pc) {
         InputProgram facts= new ASPInputProgram();
         try {
-            facts.addObjectInput(prezzoCall);
+            facts.addObjectInput(pc);
         } catch (Exception e) {
             e.printStackTrace();
         }
         handler.addProgram(facts);
     }
 
-    public void setSceltaAvversario(sceltaAvversario scelta) {
+    public void setSceltaAvversario(sceltaAvversario sv) {
         InputProgram facts= new ASPInputProgram();
         try {
-            facts.addObjectInput(scelta);
+            facts.addObjectInput(sv);
         } catch (Exception e) {
             e.printStackTrace();
         }
         handler.addProgram(facts);
     }
-    public void setNumeroAvversari(numeroAvversari numeroAvversari) {
+    public void setNumeroAvversari(numeroAvversari avv) {
         InputProgram facts= new ASPInputProgram();
         try {
-            facts.addObjectInput(numeroAvversari);
+            facts.addObjectInput(avv);
         } catch (Exception e) {
             e.printStackTrace();
         }
         handler.addProgram(facts);
     }
-    public void puntataMinima(puntataMinima puntataMinima) {
+    public void puntataMinima(puntataMinima pm) {
         InputProgram facts= new ASPInputProgram();
         try {
-            facts.addObjectInput(puntataMinima);
+            facts.addObjectInput(pm);
         } catch (Exception e) {
             e.printStackTrace();
         }
