@@ -1,5 +1,6 @@
 package game;
 import dlv.*;
+import javafx.util.Pair;
 import java.io.UnsupportedEncodingException;
 
 public class Main {
@@ -26,27 +27,22 @@ public class Main {
         prob.setcards(card1,2);
         prob.setcards(card2,3);
         System.out.println(prob.GetProbabilityVictory());*/
-
         Budget b=new Budget(5000);
         numeroAvversari numeroAvversari=new numeroAvversari(2);
-        ProbabilitaVittoria probabilitaVittoria=new ProbabilitaVittoria(80);
+        ProbabilitaVittoria probabilitaVittoria=new ProbabilitaVittoria(prob.GetProbabilityVictory());
         puntataMinima puntataMinima=new puntataMinima(300);
-        sceltaAvversario sceltaAvversario=new sceltaAvversario("call","ciccio");
-        sceltaAvversario sceltaAvversario1=new sceltaAvversario("raise","pasticcio");
+        sceltaAvversario sceltaAvversario=new sceltaAvversario("ciccio","call");
+        sceltaAvversario sceltaAvversario1=new sceltaAvversario("pasticcio","call");
         DlvChoice dlv=new DlvChoice();
-
-        System.out.println("arucaddoijsad"+sceltaAvversario.getScelta());
-
         dlv.setBudget(b);
         dlv.setChanceWin(probabilitaVittoria);
         dlv.setNumeroAvversari(numeroAvversari);
         dlv.puntataMinima(puntataMinima);
        // dlv.setSceltaAvversario(sceltaAvversario);
         dlv.setSceltaAvversario(sceltaAvversario1);
-
-
         String result=dlv.runProgram();
         System.out.println(result);
+
     }
      /*
             WebElement slider= (driver.findElement(By.xpath("//div[@class='slider-handles']/div")));
