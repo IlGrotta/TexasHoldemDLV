@@ -22,6 +22,7 @@ public abstract class State {
     protected  Card firstCardPlayer;
     protected Card secondCardPlayer;
     protected ArrayList<Card>communitycards;
+    protected HashMap<Integer, String> choiseAvversari;
     int callCost;
     int numPlayer;
     int playerWithNoChoice;
@@ -39,13 +40,12 @@ public abstract class State {
 
         takeCards();
         //todo Profiling se vogliamo farlo
-
         budget=driver.getPlayerBudget();
         callCost=driver.getCallCost();
+        choiseAvversari=driver.getChoices();
         numPlayer=driver.setNumPlayers();
         playerWithNoChoice=driver.playerWithNoChoice();
         prob=getProbabilityWin();
-
         choicePlayer=DlvChoice();
 
     }
