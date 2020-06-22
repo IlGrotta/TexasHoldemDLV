@@ -6,14 +6,14 @@ import java.io.UnsupportedEncodingException;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException, UnsupportedEncodingException {
-        /* WebConnector prova=new WebConnector();
-        System.out.println(prova.getFirstCard().getKey());
+        /*
+        System.tor();out.println(prova.getFirstCard().getKey());
         System.out.println(prova.getFirstCard().getValue());
         System.out.println(prova.getSecondCard().getKey());
         System.out.println(prova.getSecondCard().getValue());
         System.out.println(prova.getCards());
         prova.closeWeb();*/
-       /* WebProbability888 prob=new WebProbability888();
+       /*
         prob.deletefirst();
         prob.setAvversario(2);
         prob.setAvversario(3);
@@ -27,6 +27,7 @@ public class Main {
         prob.setcards(card1,2);
         prob.setcards(card2,3);
         System.out.println(prob.GetProbabilityVictory());*/
+        WebProbability888 prob=new WebProbability888();
         Budget b=new Budget(5000);
         numeroAvversari numeroAvversari=new numeroAvversari(2);
         ProbabilitaVittoria probabilitaVittoria=new ProbabilitaVittoria(prob.GetProbabilityVictory());
