@@ -270,5 +270,20 @@ public class WebConnector {
         return Integer.parseInt(driver.findElement(By.xpath("//div[@class='slider-handles']/div/div")).getText());
     }
 
+    public int numPlayerWithChoice()
+    {
+        HashMap<Integer,String> c=getChoices();
+        int cont=0;
+        for(Map.Entry<Integer, String> entry : c.entrySet()) {
+            Integer key = entry.getKey();
+            String value = entry.getValue();
+            if(value.equals("raise") || value.equals("raise") )
+                cont++;
+            // do what you have to do here
+            // In your case, another loop.
+        }
+        return cont;
+    }
+
 
 }
