@@ -9,13 +9,17 @@ import it.unical.mat.embasp.languages.asp.AnswerSets;
 import it.unical.mat.embasp.platforms.desktop.DesktopHandler;
 import it.unical.mat.embasp.specializations.dlv2.desktop.DLV2DesktopService;
 
+import java.io.File;
+import java.util.List;
+import java.util.Set;
+
 public class DlvHandler {
     protected String encodingResource;
     protected Handler handler;
     public DlvHandler()
     {
         handler=new DesktopHandler(new DLV2DesktopService("src/main/resources/dlv2.exe"));
-        setProgram("src/main/resources/firstIA.txt");
+        setProgram("src"+ File.separator+"main"+File.separator+"resources"+File.separator+"firstIA2.txt");
 
         try{
             ASPMapper.getInstance().registerClass(Scelta.class);
@@ -39,7 +43,11 @@ public class DlvHandler {
     {
         Output o=handler.startSync();
         AnswerSets answers=(AnswerSets)o;
+        System.out.println("c"+o.getErrors());
+        System.out.println("a"+((AnswerSets) o).getAnswerSetsString());
         int n=0;
+
+
         for(AnswerSet a: answers.getAnswersets())
         {
             try
