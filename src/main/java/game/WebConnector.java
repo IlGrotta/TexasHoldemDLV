@@ -7,8 +7,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class WebConnector {
     WebDriver driver;
@@ -251,6 +253,19 @@ public class WebConnector {
         return choices;
     }
 
+    public int playerWithNoChoice(){
+        HashMap<Integer,String> c=getChoices();
+        int cont=0;
+        for(Map.Entry<Integer, String> entry : c.entrySet()) {
+            Integer key = entry.getKey();
+            String value = entry.getValue();
+            if(value.equals("null"))
+                cont++;
+            // do what you have to do here
+            // In your case, another loop.
+        }
+        return cont;
+    }
     public int getCallCost(){
         return Integer.parseInt(driver.findElement(By.xpath("//div[@class='slider-handles']/div/div")).getText());
     }
