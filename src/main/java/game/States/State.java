@@ -1,9 +1,6 @@
 package game.States;
 
-import dlv.Budget;
-import dlv.DlvChoice;
-import dlv.DlvHandler;
-import dlv.WebProbability888;
+import dlv.*;
 import game.WebConnector;
 import org.openqa.selenium.WebDriver;
 
@@ -22,6 +19,9 @@ public abstract class State {
     protected static ArrayList<HashMap<String, Integer>> behaviour;
     protected static int numRound = 0;
     protected static int numPhases = 0;
+    Card firstCardPlayer;
+    Card secondCardPlayer;
+    ArrayList<Card>communitycards;
 
     public State(WebConnector connector, WebProbability888 probability){
         driver=connector;
@@ -32,13 +32,13 @@ public abstract class State {
     }
 
     public  State execute(){
-        //todo Prendi le carte
+
         takeCards();
         //todo Profiling se vogliamo farlo
-        //todo Settare il budget attuale
-        budget=driver.getPlayerBudget();
-        //todo settare costo del call/dire se c'è stato un raise prima
 
+        budget=driver.getPlayerBudget();
+        driver.getCallCost();
+        driver.setNumPlayers();
         //todo dire quanti sono in gioco, e quanti devono ancora giocare
         //todo calcolare probabilita con nostre carte
         //todo  ESEGUIRE DLV
@@ -46,7 +46,11 @@ public abstract class State {
         return null;
     }
 
-    protected abstract void takeCards();
+    protected void takeCards() {
+        firstCardPlayer=driver.getFirstCard();
+        secondCardPlayer=driver.getSecondCard();
+        communitycards=driver.getCards();
+    }
 
 
 }

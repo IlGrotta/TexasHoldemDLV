@@ -62,7 +62,7 @@ public abstract class State {
             driver.findElement(By.xpath("//button[@class='action-button']")).click();
             Thread.sleep(100);
             existPlayer=(driver.findElements( By.xpath("//div[@class='player-avatar--container']") ).size()!=0);
-        } while(!existPlayer);
+        }while(!existPlayer);
         return false;
     }
 
