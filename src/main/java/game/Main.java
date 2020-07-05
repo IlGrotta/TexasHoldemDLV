@@ -1,6 +1,5 @@
 package game;
 import dlv.*;
-import javafx.util.Pair;
 import java.io.UnsupportedEncodingException;
 
 public class Main {
@@ -13,7 +12,8 @@ public class Main {
         System.out.println(prova.getSecondCard().getValue());
         System.out.println(prova.getCards());
         prova.closeWeb();*/
-       /*
+        WebProbability888 prob=new WebProbability888();
+
         prob.deletefirst();
         prob.setAvversario(2);
         prob.setAvversario(3);
@@ -26,8 +26,9 @@ public class Main {
         prob.setcards(card,1);
         prob.setcards(card1,2);
         prob.setcards(card2,3);
-        System.out.println(prob.GetProbabilityVictory());*/
-        WebProbability888 prob=new WebProbability888();
+        System.out.println(prob.GetProbabilityVictory());
+        prob.closeWeb();
+       /* WebProbability888 prob=new WebProbability888();
         Budget b=new Budget(5000);
         numeroAvversari numeroAvversari=new numeroAvversari(2);
         ProbabilitaVittoria probabilitaVittoria=new ProbabilitaVittoria(prob.GetProbabilityVictory());
@@ -42,7 +43,7 @@ public class Main {
        // dlv.setSceltaAvversario(sceltaAvversario);
         dlv.setSceltaAvversario(sceltaAvversario1);
         String result=dlv.runProgram();
-        System.out.println(result);
+        System.out.println(result);*/
 
     }
      /*
