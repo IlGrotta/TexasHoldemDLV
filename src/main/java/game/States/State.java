@@ -5,6 +5,7 @@ import game.WebConnector;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public abstract class State {
     protected DlvChoice dlv;
@@ -38,6 +39,7 @@ public abstract class State {
 
     public void execute(){
 
+        System.out.println("TEST 1");
         takeCards();
         //todo Profiling se vogliamo farlo
         budget=driver.getPlayerBudget();
@@ -46,7 +48,23 @@ public abstract class State {
         numPlayer=driver.setNumPlayers();
         playerWithNoChoice=driver.playerWithNoChoice();
         prob=getProbabilityWin();
+        System.out.println("TEST 2");
         choicePlayer=DlvChoice();
+        System.out.println("Il player ha scelto : "+choicePlayer);
+
+
+        System.out.println("TEST 3");
+        if(choicePlayer.equals("fold"))
+            driver.Fold();
+
+        if(choicePlayer.equals("call"))
+            driver.Call();
+
+        if(choicePlayer.equals("raise")){
+            int howmuch=50;
+            driver.scrollBar(howmuch);
+            driver.Call();
+        }
 
     }
 
@@ -57,6 +75,7 @@ public abstract class State {
     }
     protected int getProbabilityWin(){
         numPlayerWithChoice=driver.numPlayerWithChoice();
+
         probability.deletefirst();
         int playerInGame=numPlayerWithChoice+driver.playerWithNoChoice();
         for(int i=2;i<2+playerInGame;i++)
@@ -64,6 +83,8 @@ public abstract class State {
             probability.setAvversario(i);
         }
         probability.setPlayerCards(firstCardPlayer,secondCardPlayer);
+
+
         for(int i=1;i<=communitycards.size();i++)
         {
             probability.setcards(communitycards.get(i-1),i);
@@ -72,20 +93,36 @@ public abstract class State {
         probability.resetTable();
         return p;
     }
-    //todo in realta va bene anche il metodo voi , va bene string solo per il testing
+    //todo in realtà va bene anche il metodo voi , va bene string solo per il testing
     protected String DlvChoice()
     {
         //todo vanno aggiunte le classi no le variabili
-        /*
-        dlv.setBudget(b);
-        dlv.setChanceWin(probabilitaVittoria);
-        dlv.setNumeroAvversari(numeroAvversari);
-        dlv.puntataMinima(puntataMinima);
+
+        dlv.setBudget(new Budget(budget));
+        dlv.setChanceWin(new ProbabilitaVittoria(prob));
+        dlv.setNumeroAvversari(new numeroAvversari(numPlayer));
+        dlv.puntataMinima(new puntataMinima(callCost));
         // dlv.setSceltaAvversario(sceltaAvversario);
-        dlv.setSceltaAvversario(sceltaAvversario1);
+
+
+        //todo son sicuro le stringhe danno problemi a dlv, ora provo cosi sennò va implementato con posizioni e si gestiscono i nomi in Java!
+        for(Map.Entry<Integer, String> entry : choiseAvversari.entrySet()) {
+            Integer key = entry.getKey();
+            String value = entry.getValue();
+            if(!value.equals("null")){
+                String n=driver.getPlayerName(key);
+                dlv.setSceltaAvversario(new sceltaAvversario(n,value));
+            }
+
+        }
+
         String result=dlv.runProgram();
-        return result;*/
-        return "scelta";
+        return result;
     }
+
+
+
+
+    public enum StateType{PREFLOP, FLOP, TURN, RIVER, ENDMATCH, ERROR}
 
 }

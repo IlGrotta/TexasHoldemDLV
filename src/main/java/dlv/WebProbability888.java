@@ -14,10 +14,17 @@ public class WebProbability888 {
     public WebProbability888() throws InterruptedException {
         System.setProperty("webdriver.gecko.driver","src/main/resources/geckodriver.exe");
         FirefoxOptions options=new FirefoxOptions();
-        options.addArguments("--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors");
+        options.addArguments("--disable-gpu\", \"--window-size=1920,1200\",\"--ignore-certificate-errors");
         driver=new FirefoxDriver(options);
         driver.navigate().to("https://www.888poker.com/poker/poker-odds-calculator");
         driver.manage().window().fullscreen();
+
+        //Chiude banner dei cookie, sembra possa dare problemi
+        if(driver.findElements(By.xpath("div[@class='message_block']/img[2]")).size()!=0  )
+       driver.findElement(By.xpath("div[@class='message_block']/img[2]")).click();
+
+
+
     }
     public void setAvversario(int N)//l'avversario rientra nel turno attuale
     {
@@ -105,7 +112,7 @@ public class WebProbability888 {
      /*   new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"player-listing\"]/div["+String.valueOf(pos)+"]")));
         if(driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div["+String.valueOf(pos)+"]")).getAttribute("data-status").equals("active")) {
             WebElement elm =driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div[\"++String.valueOf(pos)+\"]/div[1]"));
-            METODO DEL CAZZO
+
         }*/
         WebElement el = driver.findElement(By.cssSelector("#player-win-1 > span.stat"));
         Actions builder = new Actions(driver);
