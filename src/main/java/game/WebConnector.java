@@ -1,16 +1,23 @@
 package game;
 import dlv.Card;
+import game.States.State;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import static game.States.State.StateType.*;
 
 public class WebConnector {
     WebDriver driver;
@@ -46,41 +53,11 @@ public class WebConnector {
             {
                 Card card = null;
                 String card1=(driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[6]/div["+ i +"]/h6")).getText());
-                String Number=card1.substring(0,card1.length()-2);
-                Integer num=Integer.parseInt(Number);
-                if(!(num>=2 && num<=10)){
-                    if(Number.equals("J")){
-                        num=11;
-                    }
-                    if(Number.equals("Q")){
-                        num=12;
 
-                    }
-                    if(Number.equals("K")){
-                        num=13;
+                card=funcToTakeCArd(card,card1);
+                cards.add(card);
 
-                    }
-                    if(Number.equals("A")){
-                        num=14;
 
-                    }
-                }
-                if(card1.charAt(card1.length()-1)=='♣'){
-                    card=new Card("clubs",num);
-                    cards.add(card);
-                }
-                if(card1.charAt(card1.length()-1)=='♠'){
-                    card=new Card("diamonds",num);
-                    cards.add(card);
-                }
-                if(card1.charAt(card1.length()-1)=='♦'){
-                    card=new Card("spades",num);
-                    cards.add(card);
-                }
-                if(card1.charAt(card1.length()-1)=='♥'){
-                    card=new Card("hearts",num);
-                    cards.add(card);
-                }
             }
             else
             {
@@ -94,9 +71,13 @@ public class WebConnector {
     {
         Card card = null;
         String card1=(driver.findElement(By.xpath("//div[@class='player-entity--wrapper p0']/div[2]/div[1]/h6")).getText());
+        return funcToTakeCArd(card, card1);
+    }
+
+    private Card funcToTakeCArd(Card card, String card1) {
         String Number=card1.substring(0,card1.length()-2);
-        Integer num=Integer.parseInt(Number);
-        if(!(num>=2 && num<=10)){
+        Integer num=null;
+        if(Number.equals("J")||Number.equals("Q")||Number.equals("K")||Number.equals("A")){
             if(Number.equals("J")){
                 num=11;
             }
@@ -113,6 +94,19 @@ public class WebConnector {
 
             }
         }
+        else{
+            num=Integer.parseInt(Number);
+        }
+
+
+
+
+
+
+
+
+
+
         if(card1.charAt(card1.length()-1)=='♣'){
             card=new Card("clubs",num);
         }
@@ -140,38 +134,7 @@ public class WebConnector {
         }while (card1==null || card1.equals(""));
 
         System.out.println("AAAAAAAAAAA"+card1);
-        String Number=card1.substring(0,card1.length()-2);
-        Integer num=Integer.parseInt(Number);
-        if(!(num>=2 && num<=10)){
-            if(Number.equals("J")){
-                num=11;
-            }
-            if(Number.equals("Q")){
-                num=12;
-
-            }
-            if(Number.equals("K")){
-                num=13;
-
-            }
-            if(Number.equals("A")){
-                num=14;
-
-            }
-        }
-        if(card1.charAt(card1.length()-1)=='♣'){
-            card=new Card("clubs",num);
-        }
-        if(card1.charAt(card1.length()-1)=='♠'){
-            card=new Card("diamonds",num);
-        }
-        if(card1.charAt(card1.length()-1)=='♦'){
-            card=new Card("spades",num);
-        }
-        if(card1.charAt(card1.length()-1)=='♥'){
-            card=new Card("hearts",num);
-        }
-        return card;
+        return funcToTakeCArd(card, card1);
     }
 
     public  int setNumPlayers(){
@@ -192,21 +155,47 @@ public class WebConnector {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[2]/div[1]/button[1]")).click();
     }
 
-    public String getActualStateOfTheGame(){
+    public void clickNextTurn(){
+
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='showdown--nextRound--button']")));
+        element.click();
+
+    }
+
+    public void scrollBar(int pos){
+        WebElement slider= (driver.findElement(By.xpath("//div[@class='slider-handles']/div")));
+        Actions move=new Actions(driver);
+        Action action=(Action) move.dragAndDropBy(slider,pos    ,0).build();
+        action.perform();
+        try {
+            //todo migliorare
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public State.StateType getActualStateOfTheGame(){
+        while(!myTurn()){
+
+        }
         if(driver.findElements( By.xpath("//button[@class='showdown--nextRound--button']") ).size()==1)
-            return "TURNENDED";
+            return State.StateType.ENDMATCH;
 
         ArrayList<Card> cards=getCards();
         if(cards.size()==0)
-            return "PREFLOP";
+            return State.StateType.PREFLOP;
         if(cards.size()==3)
-            return "FLOP";
+            return State.StateType.FLOP;
         if(cards.size()==4)
-            return "TURN";
+            return State.StateType.TURN;
         if(cards.size()==5)
-            return "RIVER";
+            return RIVER;
 
-        return "ERRORE NON SO CHE FASE SIA OWOWOWOWO";
+        return State.StateType.ERROR;
 
 
 
@@ -215,7 +204,15 @@ public class WebConnector {
 
     public  boolean myTurn(){
         boolean turn=driver.findElements(By.xpath("//button[@class='action-button']")).size()!=0;
-        return turn;
+        boolean end=(driver.findElements( By.xpath("//button[@class='showdown--nextRound--button']") ).size())==1;
+        return turn || end;
+    }
+
+
+    public  String getPlayerName(int pos){
+        String pathPlayer="player-entity--wrapper p"+pos;
+        return driver.findElement(By.xpath("//div[@class='"+pathPlayer+"']/div[3]/div/h5")).getText();
+
     }
 
     public int getPlayerBudget(){
@@ -266,6 +263,9 @@ public class WebConnector {
         }
         return cont;
     }
+
+
+
     public int getCallCost(){
         return Integer.parseInt(driver.findElement(By.xpath("//div[@class='slider-handles']/div/div")).getText());
     }
@@ -284,6 +284,8 @@ public class WebConnector {
         }
         return cont;
     }
+
+
 
 
 }

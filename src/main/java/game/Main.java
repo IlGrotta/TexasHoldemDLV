@@ -1,36 +1,25 @@
 package game;
 import dlv.*;
+import game.States.*;
+
 import java.io.UnsupportedEncodingException;
 
 public class Main {
 
+    static State state;
     public static void main(String[] args) throws InterruptedException, UnsupportedEncodingException {
-        /*
-        System.tor();out.println(prova.getFirstCard().getKey());
-        System.out.println(prova.getFirstCard().getValue());
-        System.out.println(prova.getSecondCard().getKey());
-        System.out.println(prova.getSecondCard().getValue());
-        System.out.println(prova.getCards());
-        prova.closeWeb();*/
-        WebProbability888 prob=new WebProbability888();
 
-        prob.deletefirst();
-        prob.setAvversario(2);
-        prob.setAvversario(3);
-        Card cardp1=new Card("hearts",9);
-        Card cardp2=new Card("clubs",9);
-        prob.setPlayerCards(cardp1,cardp2);
-        Card card=new Card("diamonds",9);
-        Card card1=new Card("clubs",3);
-        Card card2=new Card("hearts",3);
-        prob.setcards(card,1);
-        prob.setcards(card1,2);
-        prob.setcards(card2,3);
-        System.out.println(prob.GetProbabilityVictory());
-        prob.closeWeb();
-       /* WebProbability888 prob=new WebProbability888();
-        Budget b=new Budget(5000);
-        numeroAvversari numeroAvversari=new numeroAvversari(2);
+       WebConnector game=new WebConnector();
+       WebProbability888 prob=new WebProbability888();
+       Budget b=new Budget(5000);
+
+       while(true){
+            if(!setState(game,prob)) break ;
+
+            state.execute();
+       }
+
+        /* numeroAvversari numeroAvversari=new numeroAvversari(2);
         ProbabilitaVittoria probabilitaVittoria=new ProbabilitaVittoria(prob.GetProbabilityVictory());
         puntataMinima puntataMinima=new puntataMinima(300);
         sceltaAvversario sceltaAvversario=new sceltaAvversario("ciccio","call");
@@ -43,8 +32,45 @@ public class Main {
        // dlv.setSceltaAvversario(sceltaAvversario);
         dlv.setSceltaAvversario(sceltaAvversario1);
         String result=dlv.runProgram();
-        System.out.println(result);*/
+        System.out.println(result);
+        */
 
+        game.closeWeb();
+        prob.closeWeb();
+
+    }
+
+
+    static boolean setState(WebConnector web, WebProbability888 prob){
+        State.StateType s= web.getActualStateOfTheGame();
+        System.out.println("State: "+s);
+        switch (s){
+            case PREFLOP:
+
+                state=new PreFlop(web,prob);
+                break;
+            case FLOP:
+                state=new Flop(web,prob);
+                break;
+            case TURN:
+                state=new Turn(web,prob);
+                break;
+            case RIVER:
+                state=new River(web,prob);
+                break;
+            case ENDMATCH:
+                state=new EndRound(web,prob);
+                break;
+            case ERROR:
+                System.out.println("ERRORE NELLO STATE");
+                web.closeWeb();
+                prob.closeWeb();
+                return false;
+
+
+        }
+
+        return true;
     }
      /*
             WebElement slider= (driver.findElement(By.xpath("//div[@class='slider-handles']/div")));

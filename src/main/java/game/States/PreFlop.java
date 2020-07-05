@@ -1,4 +1,23 @@
 package game.States;
 
-public class PreFlop {
+import dlv.Budget;
+import dlv.WebProbability888;
+import game.WebConnector;
+import org.openqa.selenium.WebDriver;
+
+import java.util.ArrayList;
+
+public class PreFlop extends State {
+
+    public PreFlop(WebConnector connector, WebProbability888 probability) {
+        super(connector, probability);
+    }
+
+
+    @Override
+    protected void takeCards() {
+        firstCardPlayer=driver.getFirstCard();
+        secondCardPlayer=driver.getSecondCard();
+        communitycards=new ArrayList<>();
+    }
 }
