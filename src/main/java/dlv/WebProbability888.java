@@ -14,7 +14,9 @@ public class WebProbability888 {
     public WebProbability888() throws InterruptedException {
         System.setProperty("webdriver.gecko.driver","src/main/resources/geckodriver.exe");
         FirefoxOptions options=new FirefoxOptions();
-        options.addArguments("--disable-gpu\", \"--window-size=1920,1200\",\"--ignore-certificate-errors");
+        //options.addArguments("--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--headless", "--disable-infobars", "--disable-extensions");
+        options.addArguments( "--window-size=1920,1200","--ignore-certificate-errors", "--disable-extensions");
+
         driver=new FirefoxDriver(options);
         driver.navigate().to("https://www.888poker.com/poker/poker-odds-calculator");
         driver.manage().window().fullscreen();
@@ -28,6 +30,7 @@ public class WebProbability888 {
     }
     public void setAvversario(int N)//l'avversario rientra nel turno attuale
     {
+        System.out.println("HO settato "+N);
         int player=N;
         driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div["+String.valueOf(player)+"]/div[3]/p")).click();
     }
@@ -70,7 +73,7 @@ public class WebProbability888 {
 
     }
     public void setPlayerCards(Card card1, Card card2) {
-        new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"player-listing\"]/div[1]/div[3]/div[1]/div[1]/div/div/div[2]")));
+        //new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"player-listing\"]/div[1]/div[3]/div[1]/div[1]/div/div/div[2]")));
         clickAndCheckPopup(By.xpath("//*[@id=\"player-listing\"]/div[1]/div[3]/div[1]/div[1]/div/div/div[2]"));
         putCard(card1);
         putCard(card2);
@@ -114,6 +117,11 @@ public class WebProbability888 {
             WebElement elm =driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div[\"++String.valueOf(pos)+\"]/div[1]"));
 
         }*/
+
+     /*
+     ID del bottone div@data-remove-player=1
+
+      */
         WebElement el = driver.findElement(By.cssSelector("#player-win-1 > span.stat"));
         Actions builder = new Actions(driver);
         builder.moveToElement(el).click(el);
@@ -121,6 +129,18 @@ public class WebProbability888 {
         new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"player-listing\"]/div[2]/div[2]")));
         WebElement element=driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div[2]/div[2]"));
         element.click();
+    }
+
+
+
+    public int numberPlayer888table(){
+        for(int i=1;i<=9;i++){
+            String classS="data-player-id=\""+1+"\"";
+            if(driver.findElement(By.xpath("//div[@data-player-id='"+i+"']/div[3]/div/p")).isEnabled())
+                return i-1;
+        }
+
+        return -1;
     }
 }
 

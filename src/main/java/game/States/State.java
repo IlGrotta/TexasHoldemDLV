@@ -74,9 +74,13 @@ public abstract class State {
         communitycards=driver.getCards();
     }
     protected int getProbabilityWin(){
+
+
+
+        /*vecchia versione
         numPlayerWithChoice=driver.numPlayerWithChoice();
 
-        probability.deletefirst();
+        //probability.deletefirst();
         int playerInGame=numPlayerWithChoice+driver.playerWithNoChoice();
         for(int i=2;i<2+playerInGame;i++)
         {
@@ -85,14 +89,40 @@ public abstract class State {
         probability.setPlayerCards(firstCardPlayer,secondCardPlayer);
 
 
+        int p=probability.GetProbabilityVictory();
+        probability.resetTable();
+        */
+        int playersNotFold=driver.playerWithNoChoice()+driver.numPlayerWithChoice();
+        int player888=probability.numberPlayer888table();
+
+        System.out.println("Player senza scelta: "+driver.playerWithNoChoice());
+        System.out.println("Player con scelta: "+driver.numPlayerWithChoice());
+        System.out.println("Giocatori al tavolo: "+player888);
+        while(player888<playersNotFold){
+            System.out.println("Ho aggiunto!");
+            //finchè bisogna aggiugnere al tavolo
+            probability.setAvversario(player888+1);
+            player888=probability.numberPlayer888table();
+        }
+        while(player888>playersNotFold){
+            System.out.println("Ho rimosso!");
+            //finchè bisogna rimuovere dal tavolo
+            probability.deletefirst();
+            player888=probability.numberPlayer888table();
+        }
+
         for(int i=1;i<=communitycards.size();i++)
         {
             probability.setcards(communitycards.get(i-1),i);
         }
+        probability.setPlayerCards(firstCardPlayer,secondCardPlayer);
         int p=probability.GetProbabilityVictory();
         probability.resetTable();
         return p;
     }
+
+
+
     //todo in realtà va bene anche il metodo voi , va bene string solo per il testing
     protected String DlvChoice()
     {
