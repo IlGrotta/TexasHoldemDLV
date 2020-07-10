@@ -3,12 +3,14 @@ import dlv.Card;
 import game.States.State;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -29,11 +31,20 @@ public class WebConnector {
         options.addArguments("--disable-gpu\", \"--window-size=1920,1200\",\"--ignore-certificate-errors");
         driver=new FirefoxDriver(options);
         driver.navigate().to("http://react-poker.surge.sh/");
-
+        //Thread.sleep(10000);
         while(!myTurn()){
             //ONLY FIRST TIME; SO THE GAME IS LOADED! TODO A BETTER SOLUTION
         }
-
+        JavascriptExecutor js=(JavascriptExecutor)driver;
+        //js.executeScript("document.getElementById('actionBox').style.display = '1';");
+        //js.executeScript("  document.getElementByCss(actionBox).style.display = 'block'; ");
+       // js.executeScript("document.getElementsByClassName('actionBox').style.display='block';");
+        WebElement element=driver.findElement(By.className("actionBox"));
+        ((JavascriptExecutor) driver).executeScript("document.getElementsByClassName('actionBox')[0].style.display='block'");
+        ((JavascriptExecutor) driver).executeScript("document.getElementsByClassName('actionBox')[1].style.display='block'");
+        ((JavascriptExecutor) driver).executeScript("document.getElementsByClassName('actionBox')[2].style.display='block'");
+        ((JavascriptExecutor) driver).executeScript("document.getElementsByClassName('actionBox')[3].style.display='block'");
+        ((JavascriptExecutor) driver).executeScript("document.getElementsByClassName('actionBox')[4].style.display='block'");
     }
     public int getPot()
     {
@@ -71,6 +82,11 @@ public class WebConnector {
     public Card getFirstCard()
     {
         Card card = null;
+        (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return d.findElement(By.xpath("//div[@class='player-entity--wrapper p0']/div[2]/div[1]/h6")).getText().length() != 0;
+            }
+        });
         String card1=(driver.findElement(By.xpath("//div[@class='player-entity--wrapper p0']/div[2]/div[1]/h6")).getText());
         return funcToTakeCArd(card, card1);
     }
@@ -159,7 +175,9 @@ public class WebConnector {
     public void clickNextTurn(){
 
         WebDriverWait wait = new WebDriverWait(driver, 20);
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='showdown--nextRound--button']")));
+        WebElement element = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//button[@class='showdown--nextRound--button']"))  ));
+         element = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//button[@class='showdown--nextRound--button']"))  ));
+
         element.click();
 
     }
@@ -225,19 +243,23 @@ public class WebConnector {
         }
         return -1;
     }
-    //*[@id="root"]/div/div/div/div[1]/div[2]/div[1]
+
     public void closeWeb()
     {
         driver.close();
     }
+
     public HashMap<Integer,String>getChoices(){
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         HashMap<Integer,String> choices=new HashMap<Integer, String>();
         for(int i=0;i<numPlayers;i++){
             String pathPlayer="player-entity--wrapper p"+i;
-            if(!driver.findElement(By.xpath("//div[@class='"+pathPlayer+"']/div[3]/div/h5" )).getText().equals("Player 1")  ){
-                if(driver.findElement(By.xpath("//div[@class='"+pathPlayer+"']/div")).getText())
                 String choice=driver.findElement(By.xpath("//div[@class='"+pathPlayer+"']/div")).getText();
-                System.out.println("Il giocatore "+pathPlayer+" ha scelto: "+choice);
+                System.out.println("La scelta di "+i+" è: "+choice);
                 if (choice==null)
                      choices.put(i,"null");
                 else
@@ -247,7 +269,7 @@ public class WebConnector {
 
                   }
 
-            }
+
         }
         return choices;
     }
@@ -258,6 +280,7 @@ public class WebConnector {
         for(Map.Entry<Integer, String> entry : c.entrySet()) {
             Integer key = entry.getKey();
             String value = entry.getValue();
+            //System.out.println(key+"    adassadsadsadsasad "+value);
             if(value.equals("null"))
                 cont++;
             // do what you have to do here
@@ -279,7 +302,7 @@ public class WebConnector {
         for(Map.Entry<Integer, String> entry : c.entrySet()) {
             Integer key = entry.getKey();
             String value = entry.getValue();
-            if(value.equals("raise") || value.equals("raise") )
+            if(value.equals("Raise") || value.equals("Call") ||value.equals("Check")||value.equals("Bet"))
                 cont++;
             // do what you have to do here
             // In your case, another loop.
