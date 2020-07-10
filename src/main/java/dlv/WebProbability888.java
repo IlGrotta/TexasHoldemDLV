@@ -1,8 +1,5 @@
 package dlv;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
@@ -137,6 +134,7 @@ public class WebProbability888 {
 
 
     public int numberPlayer888table(){
+
 
 
         return cont;

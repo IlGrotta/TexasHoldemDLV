@@ -75,8 +75,6 @@ public abstract class State {
     }
     protected int getProbabilityWin(){
 
-
-
         /*vecchia versione
         numPlayerWithChoice=driver.numPlayerWithChoice();
 
