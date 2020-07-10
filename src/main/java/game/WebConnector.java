@@ -29,10 +29,11 @@ public class WebConnector {
         options.addArguments("--disable-gpu\", \"--window-size=1920,1200\",\"--ignore-certificate-errors");
         driver=new FirefoxDriver(options);
         driver.navigate().to("http://react-poker.surge.sh/");
-        //Thread.sleep(10000);
+
         while(!myTurn()){
             //ONLY FIRST TIME; SO THE GAME IS LOADED! TODO A BETTER SOLUTION
         }
+
     }
     public int getPot()
     {
@@ -224,18 +225,19 @@ public class WebConnector {
         }
         return -1;
     }
-
+    //*[@id="root"]/div/div/div/div[1]/div[2]/div[1]
     public void closeWeb()
     {
         driver.close();
     }
-
     public HashMap<Integer,String>getChoices(){
         HashMap<Integer,String> choices=new HashMap<Integer, String>();
         for(int i=0;i<numPlayers;i++){
             String pathPlayer="player-entity--wrapper p"+i;
             if(!driver.findElement(By.xpath("//div[@class='"+pathPlayer+"']/div[3]/div/h5" )).getText().equals("Player 1")  ){
+                if(driver.findElement(By.xpath("//div[@class='"+pathPlayer+"']/div")).getText())
                 String choice=driver.findElement(By.xpath("//div[@class='"+pathPlayer+"']/div")).getText();
+                System.out.println("Il giocatore "+pathPlayer+" ha scelto: "+choice);
                 if (choice==null)
                      choices.put(i,"null");
                 else
