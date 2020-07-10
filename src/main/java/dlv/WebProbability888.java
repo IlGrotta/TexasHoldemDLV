@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import dlv.Card;
 public class WebProbability888 {
+    public int cont=1;
     private WebDriver driver;
     public WebProbability888() throws InterruptedException {
         System.setProperty("webdriver.gecko.driver","src/main/resources/geckodriver.exe");
@@ -31,8 +32,9 @@ public class WebProbability888 {
     public void setAvversario(int N)//l'avversario rientra nel turno attuale
     {
         System.out.println("HO settato "+N);
-        int player=N;
+        int player=N+2;
         driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div["+String.valueOf(player)+"]/div[3]/p")).click();
+        cont++;
     }
     public int GetProbabilityVictory()
     {
@@ -129,18 +131,15 @@ public class WebProbability888 {
         new WebDriverWait(driver, 100).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"player-listing\"]/div[2]/div[2]")));
         WebElement element=driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div[2]/div[2]"));
         element.click();
+        cont--;
     }
 
 
 
     public int numberPlayer888table(){
-        for(int i=1;i<=9;i++){
-            String classS="data-player-id=\""+1+"\"";
-            if(driver.findElement(By.xpath("//div[@data-player-id='"+i+"']/div[3]/div/p")).isEnabled())
-                return i-1;
-        }
 
-        return -1;
+
+        return cont;
     }
 }
 

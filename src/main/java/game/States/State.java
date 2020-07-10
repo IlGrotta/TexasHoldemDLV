@@ -94,14 +94,14 @@ public abstract class State {
         */
         int playersNotFold=driver.playerWithNoChoice()+driver.numPlayerWithChoice();
         int player888=probability.numberPlayer888table();
-
+        System.out.println("Player not fold: "+playersNotFold);
         System.out.println("Player senza scelta: "+driver.playerWithNoChoice());
         System.out.println("Player con scelta: "+driver.numPlayerWithChoice());
         System.out.println("Giocatori al tavolo: "+player888);
-        while(player888<playersNotFold){
+        while(player888<playersNotFold-1){
             System.out.println("Ho aggiunto!");
             //finchè bisogna aggiugnere al tavolo
-            probability.setAvversario(player888+1);
+            probability.setAvversario(player888);
             player888=probability.numberPlayer888table();
         }
         while(player888>playersNotFold){
