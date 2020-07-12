@@ -36,7 +36,7 @@ public abstract class State {
         dlvHandler=new DlvHandler();
         dlv=new DlvChoice();
     }
-
+    
     public void execute(){
 
         System.out.println("TEST 1");
@@ -61,9 +61,25 @@ public abstract class State {
             driver.Call();
 
         if(choicePlayer.equals("raise")){
-            int howmuch=50;
-            driver.scrollBar(howmuch);
-            driver.Call();
+            // TODO: 11/07/2020 sol temporanea delle 23:10 dopo 2 birre. in base alla percentuale di vittoria punto
+            int howmuch=0;
+            if(callCost>budget){
+                howmuch=0;
+            }
+            else {
+                if (prob >= 50 && prob <= 60)
+                    howmuch = 25;
+                if (prob >= 70 && prob <= 80)
+                    howmuch = 45;
+                if (prob >= 80 && prob <= 90)
+                    howmuch = 55;
+                if (prob >= 90 && prob <= 95)
+                    howmuch = 65;
+                if (prob >= 96 && prob <= 100)
+                    howmuch = 85;
+                driver.scrollBar(howmuch);
+                driver.Call();
+            }
         }
 
     }

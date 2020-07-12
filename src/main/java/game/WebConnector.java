@@ -64,6 +64,13 @@ public class WebConnector {
             if(driver.findElements( By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[6]/div["+ i +"]/h6") ).size()!=0)
             {
                 Card card = null;
+                int finalI = i;
+                (new WebDriverWait(driver, 15)).until(new ExpectedCondition<Boolean>() {
+                    int a= finalI;
+                    public Boolean apply(WebDriver d) {
+                        return d.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[6]/div["+ a +"]/h6")).getText().length() != 0;
+                    }
+                });
                 String card1=(driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[6]/div["+ i +"]/h6")).getText());
 
                 card=funcToTakeCArd(card,card1);
@@ -82,7 +89,7 @@ public class WebConnector {
     public Card getFirstCard()
     {
         Card card = null;
-        (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
+        (new WebDriverWait(driver, 15)).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver d) {
                 return d.findElement(By.xpath("//div[@class='player-entity--wrapper p0']/div[2]/div[1]/h6")).getText().length() != 0;
             }
@@ -92,7 +99,10 @@ public class WebConnector {
     }
 
     private Card funcToTakeCArd(Card card, String card1) {
+        System.out.println("mi sono bloccato con carta"+card1);
         String Number=card1.substring(0,card1.length()-2);
+        System.out.println("mi sono bloccato con carta"+card1+Number);
+
         Integer num=null;
         if(Number.equals("J")||Number.equals("Q")||Number.equals("K")||Number.equals("A")){
             if(Number.equals("J")){
@@ -177,7 +187,12 @@ public class WebConnector {
         WebDriverWait wait = new WebDriverWait(driver, 20);
         WebElement element = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//button[@class='showdown--nextRound--button']"))  ));
          element = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//button[@class='showdown--nextRound--button']"))  ));
-
+         try {
+             Thread.sleep(500);
+         }
+         catch (Exception e){
+             e.printStackTrace();
+         }
         element.click();
 
     }
@@ -243,7 +258,18 @@ public class WebConnector {
         }
         return -1;
     }
-
+    public boolean existPlayer(){
+        boolean check=false;
+        for(int i=0;i<numPlayers;i++){
+            String pathPlayer="player-entity--wrapper p"+i;
+            if(driver.findElements(By.xpath("//div[@class='"+pathPlayer+"']/div")).size()!=0) {
+                if (driver.findElement(By.xpath("//div[@class='" + pathPlayer + "']/div[3]/div/h5")).getText().equals("Player 1")) {
+                    check = true;
+                }
+            }
+        }
+        return check;
+    }
     public void closeWeb()
     {
         driver.close();
@@ -258,18 +284,16 @@ public class WebConnector {
         HashMap<Integer,String> choices=new HashMap<Integer, String>();
         for(int i=0;i<numPlayers;i++){
             String pathPlayer="player-entity--wrapper p"+i;
-                String choice=driver.findElement(By.xpath("//div[@class='"+pathPlayer+"']/div")).getText();
-                System.out.println("La scelta di "+i+" è: "+choice);
-                if (choice==null)
-                     choices.put(i,"null");
-                else
-                  {
-                    String[] split=choice.split(" ");
-                     choices.put(i,split[0]);
-
-                  }
-
-
+            if(driver.findElements(By.xpath("//div[@class='"+pathPlayer+"']/div")).size()!=0) {
+                String choice = driver.findElement(By.xpath("//div[@class='" + pathPlayer + "']/div")).getText();
+                System.out.println("La scelta di " + i + " è: " + choice);
+                if (choice == null)
+                    choices.put(i, "null");
+                else {
+                    String[] split = choice.split(" ");
+                    choices.put(i, split[0]);
+                }
+            }
         }
         return choices;
     }

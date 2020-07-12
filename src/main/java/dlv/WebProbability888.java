@@ -12,8 +12,8 @@ public class WebProbability888 {
     public WebProbability888() throws InterruptedException {
         System.setProperty("webdriver.gecko.driver","src/main/resources/geckodriver.exe");
         FirefoxOptions options=new FirefoxOptions();
-        //options.addArguments("--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--headless", "--disable-infobars", "--disable-extensions");
-        options.addArguments( "--window-size=1920,1200","--ignore-certificate-errors", "--disable-extensions");
+        options.addArguments("--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--headless", "--disable-infobars", "--disable-extensions");
+        //options.addArguments( "--window-size=1920,1200","--ignore-certificate-errors", "--disable-extensions");
 
         driver=new FirefoxDriver(options);
         driver.navigate().to("https://www.888poker.com/poker/poker-odds-calculator");
@@ -35,6 +35,12 @@ public class WebProbability888 {
     }
     public int GetProbabilityVictory()
     {
+        try {
+            Thread.sleep(500);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         String value=driver.findElement(By.xpath("//*[@id=\"player-win-0\"]/span[2]")).getText();
         return (int) Float.parseFloat(value.substring(0,value.length()-1));
     }
