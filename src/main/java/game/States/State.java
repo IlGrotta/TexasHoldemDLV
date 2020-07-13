@@ -36,7 +36,7 @@ public abstract class State {
         dlvHandler=new DlvHandler();
         dlv=new DlvChoice();
     }
-    
+
     public void execute(){
 
         System.out.println("TEST 1");
