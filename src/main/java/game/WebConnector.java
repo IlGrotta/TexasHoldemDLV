@@ -177,6 +177,7 @@ public class WebConnector {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[2]/div[1]/button[2]")).click();
     }
 
+    // TODO: 13/07/2020 possibile errore ad esempio se execute chiama call ma non trova l'elemento perchè ad esempio e all va in loop 
     public void Call()
     {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[2]/div[1]/button[1]")).click();
