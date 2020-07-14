@@ -57,9 +57,13 @@ public abstract class State {
         if(choicePlayer.equals("fold"))
             driver.Fold();
 
-        if(choicePlayer.equals("call"))
+        if(choicePlayer.equals("call")) {
             driver.Call();
-
+            int howmuch=0;
+            if(callCost>budget){
+                howmuch=0;
+            }
+        }
         if(choicePlayer.equals("raise")){
             // TODO: 11/07/2020 sol temporanea delle 23:10 dopo 2 birre. in base alla percentuale di vittoria punto
             int howmuch=0;
