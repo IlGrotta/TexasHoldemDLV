@@ -217,8 +217,14 @@ public class WebConnector {
         while(!myTurn()){
 
         }
-        if(driver.findElements( By.xpath("//button[@class='showdown--nextRound--button']") ).size()==1)
+        if(driver.findElements( By.xpath("//button[@class='showdown--nextRound--button']") ).size()==1) {
+         if(gameEnded())
+             return  LOSEALL;
+         else
             return State.StateType.ENDMATCH;
+
+
+        }
 
         ArrayList<Card> cards=getCards();
         if(cards.size()==0)
@@ -335,7 +341,35 @@ public class WebConnector {
         return cont;
     }
 
+    public boolean gameEnded(){
+        String thePlayer=null;
+        for(int i=0;i<numPlayers;i++){
+            String pathPlayer="player-entity--wrapper p"+i;
+            if(driver.findElement(By.xpath("//div[@class='"+pathPlayer+"']/div[3]/div/h5" )).getText().equals("Player 1")  ){
+               thePlayer= new String(pathPlayer);
+            }
+        }
 
+        //se finiamo il budget
+        if(driver.findElement(By.xpath("//div[@class='"+thePlayer+"']/div[3]/div/div/h5")).getText().equals("0")  ){
+            return  true;
+        }
+
+
+        int cont=0;
+        for(int i=0;i<numPlayers;i++){
+            String pathPlayer="player-entity--wrapper p"+i;
+            if(!pathPlayer.equals(thePlayer))
+                if(!driver.findElement(By.xpath("//div[@class='"+pathPlayer+"']/div[3]/div/div/h5" )).getText().equals("0")  ){
+                cont++;
+            }
+        }
+
+        if(cont>0)
+            return false;
+
+        return true;
+    }
 
 
 }
