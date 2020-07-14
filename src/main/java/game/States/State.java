@@ -66,21 +66,24 @@ public abstract class State {
         }
         if(choicePlayer.equals("raise")){
             // TODO: 11/07/2020 sol temporanea delle 23:10 dopo 2 birre. in base alla percentuale di vittoria punto
-            int howmuch=0;
+            // TODO: 14/07      bisogna riguardare n'attimo le percentuali
+            int howmuch=160;
             if(callCost>budget){
                 howmuch=0;
             }
             else {
-                if (prob >= 50 && prob <= 60)
-                    howmuch = 25;
-                if (prob >= 70 && prob <= 80)
-                    howmuch = 45;
-                if (prob >= 80 && prob <= 90)
-                    howmuch = 55;
-                if (prob >= 90 && prob <= 95)
-                    howmuch = 65;
-                if (prob >= 96 && prob <= 100)
-                    howmuch = 85;
+                if (prob >= 45 && prob <= 55)
+                    howmuch = 200;
+                if (prob >= 56 && prob <= 65)
+                    howmuch = 400;
+                if (prob >= 66 && prob <= 75)
+                    howmuch = 500;
+                if (prob >= 75 && prob <= 85)
+                    howmuch = 650;
+                if (prob >= 86 && prob <= 100)
+                    howmuch = 800 ;
+
+                System.out.println("AUMENTO DI "+howmuch +"con probabilità di "+prob);
                 driver.scrollBar(howmuch);
                 driver.Call();
             }
@@ -168,9 +171,6 @@ public abstract class State {
         return result;
     }
 
-
-
-
-    public enum StateType{PREFLOP, FLOP, TURN, RIVER, ENDMATCH, ERROR}
+    public enum StateType{PREFLOP, FLOP, TURN, RIVER, ENDMATCH, LOSEALL, ERROR}
 
 }

@@ -13,7 +13,7 @@ public class Main {
        WebProbability888 prob=new WebProbability888();
        Budget b=new Budget(5000);
 
-       while(true){
+       while(!(state instanceof LoseAll)){
             if(!setState(game,prob)) break ;
 
             state.execute();
@@ -60,6 +60,9 @@ public class Main {
                 break;
             case ENDMATCH:
                 state=new EndRound(web,prob);
+                break;
+            case LOSEALL:
+                state=new LoseAll(web,prob);
                 break;
             case ERROR:
                 System.out.println("ERRORE NELLO STATE");
