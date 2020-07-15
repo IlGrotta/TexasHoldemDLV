@@ -11,12 +11,11 @@ scelta(X)|notScelta(X):- decisione(X).
 %non e possibile che la scelta  sia fold  se la puntata minima e 0
 :-scelta(fold),puntataMinima(X),X=0.
 
-%non e possibile che la scelta non sia fold se più di un avversario fa raise e la probabilità di vittoria e minore del 60
-:- not scelta(fold),#count{X:sceltaAvversario(X,raise)}>1,probabilitaVittoria(Z),Z<=60.
+%non e possibile che la scelta non sia fold se più di un avversario fa raise e la probabilità di vittoria e minore del 15
+:- not scelta(fold),#count{X:sceltaAvversario(X,raise)}>1,probabilitaVittoria(Z),Z<=15.
 
 %non e possibile che la scelta sia raise se puntata minima=Budget
 :-scelta(raise),puntataMinima(X),budget(X).
 
-%non e possibile che la scelta non sia raise se tutti hanno fatto call e le probabilità vittoria e maggiore del 50
-:-not scelta(raise),avversari(N),#count{X:sceltaAvversario(X,call)}=N,probabilitaVittoria(Z),Z>50.
-
+%non e possibile che la scelta non sia raise se tutti hanno fatto call e le probabilità vittoria e maggiore del 10
+:-not scelta(raise),avversari(N),#count{X:sceltaAvversario(X,call)}=N,probabilitaVittoria(Z),Z>40.

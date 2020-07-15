@@ -1,0 +1,11 @@
+decisione(normale).
+decisione(furioso).
+decisione(conservativo).
+
+scelta(X)|notScelta(X):- decisione(X).
+
+%solo una scelta per volta
+:- not #count{X:scelta(X)}=1.
+:- notScelta(normale),budget(X),X>6000 ,X<20000.
+:-notScelta(furioso),budget(X),X>20000.
+:-notScelta(conservativo),budget(X),X<6000.

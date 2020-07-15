@@ -9,6 +9,7 @@ import java.util.Map;
 
 public abstract class State {
     protected DlvChoice dlv;
+    protected DlvProfiling dlvProfiling;
     protected DlvHandler dlvHandler;
     protected WebConnector driver;
     protected int budget;
@@ -20,6 +21,7 @@ public abstract class State {
     protected static int numRound = 0;
     protected static int numPhases = 0;
     protected String choicePlayer;
+    protected String choiceProgram;
     protected  Card firstCardPlayer;
     protected Card secondCardPlayer;
     protected ArrayList<Card>communitycards;
@@ -34,7 +36,9 @@ public abstract class State {
         budget=driver.getPlayerBudget();
         this.probability=probability;
         dlvHandler=new DlvHandler();
+        dlvProfiling= new DlvProfiling();
         dlv=new DlvChoice();
+
     }
 
     public void execute(){
@@ -49,7 +53,9 @@ public abstract class State {
         playerWithNoChoice=driver.playerWithNoChoice();
         prob=getProbabilityWin();
         System.out.println("TEST 2");
+        choiceProgram=DlvProfiling();
         choicePlayer=DlvChoice();
+
         System.out.println("Il player ha scelto : "+choicePlayer);
 
 
@@ -58,11 +64,11 @@ public abstract class State {
             driver.Fold();
 
         if(choicePlayer.equals("call")) {
-            driver.Call();
             int howmuch=0;
-            if(callCost>budget){
-                howmuch=0;
-            }
+                System.out.println("AUMENTO DI "+howmuch +"con probabilità di "+prob);
+            driver.scrollBar(howmuch);
+            driver.Call();
+
         }
         if(choicePlayer.equals("raise")){
             // TODO: 11/07/2020 sol temporanea delle 23:10 dopo 2 birre. in base alla percentuale di vittoria punto
@@ -170,7 +176,15 @@ public abstract class State {
         String result=dlv.runProgram();
         return result;
     }
-
+    protected String DlvProfiling(){
+        dlvProfiling.setBudget(new Budget(budget));
+        System.out.println("budget"+budget);
+        dlvProfiling.setProgram("src/main/resources/profiling.txt");
+        String result=dlvProfiling.runProgram();
+        System.out.println("ho scelto il programma"+result);
+        dlv.setProgram("src/main/resources/"+result+".txt");
+        return result;
+    }
     public enum StateType{PREFLOP, FLOP, TURN, RIVER, ENDMATCH, LOSEALL, ERROR}
 
 }

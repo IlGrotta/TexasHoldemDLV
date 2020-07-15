@@ -16,10 +16,12 @@ import java.util.Set;
 public class DlvHandler {
     protected String encodingResource;
     protected Handler handler;
+
+    // TODO: 14/07/2020 mettero il  tramite una booleana
     public DlvHandler()
     {
         handler = new DesktopHandler(new DLV2DesktopService("src/main/resources/dlv2.exe"));
-        setProgram("src/main/resources/first.txt");
+        setProgram("src/main/resources/normale.txt");
 
         try{
             ASPMapper.getInstance().registerClass(Scelta.class);
