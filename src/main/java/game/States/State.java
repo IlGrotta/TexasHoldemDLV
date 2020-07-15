@@ -36,7 +36,7 @@ public abstract class State {
         budget=driver.getPlayerBudget();
         this.probability=probability;
         dlvHandler=new DlvHandler();
-        dlvProfiling= new DlvProfiling();
+      //  dlvProfiling= new DlvProfiling();
         dlv=new DlvChoice();
 
     }
@@ -53,7 +53,7 @@ public abstract class State {
         playerWithNoChoice=driver.playerWithNoChoice();
         prob=getProbabilityWin();
         System.out.println("TEST 2");
-        choiceProgram=DlvProfiling();
+       // choiceProgram=DlvProfiling();
         choicePlayer=DlvChoice();
 
         System.out.println("Il player ha scelto : "+choicePlayer);
