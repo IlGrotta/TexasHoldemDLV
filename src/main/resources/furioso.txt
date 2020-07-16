@@ -5,17 +5,36 @@ scelta(X)|notScelta(X):- decisione(X).
 %solo una scelta per volta
 :- not #count{X:scelta(X)}=1.
 
-%non e possibile che la scelta non sia fold se la puntata minima è maggiore del budget.
-:- not scelta(fold),puntataMinima(X),budget(Y),X>Y.
+%non e possibile che la scelta non sia fold se la puntata minima è maggiore del budget e la prob e minore del 65.
+:- notScelta(fold),puntataMinima(X),budget(Y),X>Y,probabilitaVittoria(Z),Z<65.
+
+%non e possibile che la scelta non sia call se la puntata minima è maggiore del budget e la prob e maggiore o uguale  del 65 .
+:- notScelta(call),puntataMinima(X),budget(Y),X>Y,probabilitaVittoria(Z),Z>=65.
 
 %non e possibile che la scelta  sia fold  se la puntata minima e 0
 :-scelta(fold),puntataMinima(X),X=0.
 
-%non e possibile che la scelta non sia fold se più di un avversario fa raise e la probabilità di vittoria e minore del 15
-:- not scelta(fold),#count{X:sceltaAvversario(X,raise)}>1,probabilitaVittoria(Z),Z<=15.
+%non e possibile che la scelta non sia fold se più di un avversario fa raise e la probabilità di vittoria e minore del 60
+:- notScelta(fold),#count{X:sceltaAvversario(X,raise)}>1,probabilitaVittoria(Z),Z<=60.
+
+%non e possibile che la scelta non sia call se più di un avversario fa raise e la probabilità di vittoria e maggiore  del 60 e minore del 90
+:- notScelta(call),#count{X:sceltaAvversario(X,raise)}>1,probabilitaVittoria(Z),Z>60,Z<90.
+
+%non e possibile che la scelta non sia raise se più di un avversario fa raise e la probabilità di vittoria e maggiore del 90
+:- notScelta(raise),#count{X:sceltaAvversario(X,raise)}>1,probabilitaVittoria(Z),Z>90.
 
 %non e possibile che la scelta sia raise se puntata minima=Budget
 :-scelta(raise),puntataMinima(X),budget(X).
 
-%non e possibile che la scelta non sia raise se tutti hanno fatto call e le probabilità vittoria e maggiore del 10
-:-not scelta(raise),avversari(N),#count{X:sceltaAvversario(X,call)}=N,probabilitaVittoria(Z),Z>40.
+
+%non e possibile che la scelta non sia raise se tutti hanno fatto call e le probabilità vittoria e maggiore del 40
+:-notScelta(raise),avversari(N),#count{X:sceltaAvversario(X,call)}=N,probabilitaVittoria(Z),Z>40.
+
+%se la scelta non e raise  pago prob@2 ma prob deve essere maggiore di 15
+:~notScelta(X),X=raise,probabilitaVittoria(Z),Z>15.[Z@2,X]
+
+%se la scelta non e call pago
+:~notScelta(X),X=call.[60@1,X]
+
+%se noi non scegliamo fold paghiamo 50.
+:~notScelta(X),X=fold,probabilitaVittoria(Z).[50@1,X]

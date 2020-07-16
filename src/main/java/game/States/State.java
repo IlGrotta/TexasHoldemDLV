@@ -47,6 +47,7 @@ public abstract class State {
         takeCards();
         //todo Profiling se vogliamo farlo
         budget=driver.getPlayerBudget();
+        System.out.println(budget);
         callCost=driver.getCallCost();
         choiseAvversari=driver.getChoices();
         numPlayer=driver.setNumPlayers();
@@ -60,9 +61,11 @@ public abstract class State {
 
 
         System.out.println("TEST 3");
-        if(choicePlayer.equals("fold"))
+        if(choicePlayer.equals("fold")) {
+            System.out.println("probabilità di "+prob);
             driver.Fold();
 
+        }
         if(choicePlayer.equals("call")) {
             int howmuch=0;
                 System.out.println("AUMENTO DI "+howmuch +"con probabilità di "+prob);

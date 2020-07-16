@@ -260,10 +260,11 @@ public class WebConnector {
         for(int i=0;i<numPlayers;i++){
             String pathPlayer="player-entity--wrapper p"+i;
             if(driver.findElement(By.xpath("//div[@class='"+pathPlayer+"']/div[3]/div/h5" )).getText().equals("Player 1")  ){
+
                 return Integer.parseInt(driver.findElement(By.xpath("//div[@class='"+pathPlayer+"']/div[3]/div/div/h5" )).getText());
             }
         }
-        return -1;
+        return 20000;
     }
     public boolean existPlayer(){
         boolean check=false;

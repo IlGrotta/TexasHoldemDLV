@@ -11,7 +11,7 @@ public class Main {
 
        WebConnector game=new WebConnector();
        WebProbability888 prob=new WebProbability888();
-       Budget b=new Budget(5000);
+       Budget b=new Budget(20000);
 
        while(!(state instanceof LoseAll)){
             if(!setState(game,prob)) break ;
