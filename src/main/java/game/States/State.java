@@ -20,6 +20,9 @@ public abstract class State {
     protected static ArrayList<HashMap<String, Integer>> behaviour;
     protected static int numRound = 0;
     protected static int numPhases = 0;
+    protected String  stati=null;
+
+    protected int posstati=0;
     protected String choicePlayer;
     protected String choiceProgram;
     protected  Card firstCardPlayer;
@@ -38,11 +41,10 @@ public abstract class State {
         dlvHandler=new DlvHandler();
       //  dlvProfiling= new DlvProfiling();
         dlv=new DlvChoice();
-
     }
 
     public void execute(){
-
+        changeprogram();
         System.out.println("TEST 1");
         takeCards();
         //todo Profiling se vogliamo farlo
@@ -50,11 +52,11 @@ public abstract class State {
         System.out.println(budget);
         callCost=driver.getCallCost();
         choiseAvversari=driver.getChoices();
-        numPlayer=driver.setNumPlayers();
+        numPlayer=driver.setNumPlayers()-1;
+
         playerWithNoChoice=driver.playerWithNoChoice();
         prob=getProbabilityWin();
         System.out.println("TEST 2");
-       // choiceProgram=DlvProfiling();
         choicePlayer=DlvChoice();
 
         System.out.println("Il player ha scelto : "+choicePlayer);
@@ -179,14 +181,8 @@ public abstract class State {
         String result=dlv.runProgram();
         return result;
     }
-    protected String DlvProfiling(){
-        dlvProfiling.setBudget(new Budget(budget));
-        System.out.println("budget"+budget);
-        dlvProfiling.setProgram("src/main/resources/profiling.txt");
-        String result=dlvProfiling.runProgram();
-        System.out.println("ho scelto il programma"+result);
-        dlv.setProgram("src/main/resources/"+result+".txt");
-        return result;
+    protected void changeprogram(){
+        dlv.setProgram("src/main/resources/normale/"+stati+".txt");
     }
     public enum StateType{PREFLOP, FLOP, TURN, RIVER, ENDMATCH, LOSEALL, ERROR}
 

@@ -7,6 +7,7 @@ public class Flop extends State {
 
     public Flop(WebConnector connector, WebProbability888 probability) {
         super(connector, probability);
+        stati="flop";
     }
 
 

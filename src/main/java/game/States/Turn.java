@@ -7,6 +7,7 @@ public class Turn extends State {
 
     public Turn(WebConnector connector, WebProbability888 probability) {
         super(connector, probability);
+        stati="turn";
     }
 
 
