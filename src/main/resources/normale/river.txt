@@ -15,10 +15,10 @@ scelta(X)|notScelta(X):- decisione(X).
 
 %altri giocatori call
 
-:-scelta(X),X=call,avversari(Y),Y=1,probabilitaVittoria(Z),Z<85.
-:-scelta(X),X=call,avversari(Y),Y=2,probabilitaVittoria(Z),Z<72.
-:-scelta(X),X=call,avversari(Y),Y=3,probabilitaVittoria(Z),Z<61.
-:-scelta(X),X=call,avversari(Y),Y=4,probabilitaVittoria(Z),Z<51.
+:-scelta(X),X=call,avversari(Y),Y=1,probabilitaVittoria(Z),Z<85,puntataMinima(K),K!=0.
+:-scelta(X),X=call,avversari(Y),Y=2,probabilitaVittoria(Z),Z<72,puntataMinima(K),K!=0.
+:-scelta(X),X=call,avversari(Y),Y=3,probabilitaVittoria(Z),Z<61,puntataMinima(K),K!=0.
+:-scelta(X),X=call,avversari(Y),Y=4,probabilitaVittoria(Z),Z<51,puntataMinima(K),K!=0.
 
 %altri giocatori raise
 
