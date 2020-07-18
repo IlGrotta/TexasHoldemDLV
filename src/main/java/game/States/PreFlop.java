@@ -12,6 +12,7 @@ public class PreFlop extends State {
     public PreFlop(WebConnector connector, WebProbability888 probability) {
         super(connector, probability);
         stati="preflop";
+        changeprogram();
     }
 
 

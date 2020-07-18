@@ -44,7 +44,6 @@ public abstract class State {
     }
 
     public void execute(){
-        changeprogram();
         System.out.println("TEST 1");
         takeCards();
         //todo Profiling se vogliamo farlo
@@ -53,7 +52,7 @@ public abstract class State {
         callCost=driver.getCallCost();
         choiseAvversari=driver.getChoices();
         numPlayer=driver.setNumPlayers()-1;
-        System.out.println(numPlayer);
+        System.out.println("stato di gioco"+stati);
         playerWithNoChoice=driver.playerWithNoChoice();
         prob=getProbabilityWin();
         System.out.println("TEST 2");
@@ -100,7 +99,6 @@ public abstract class State {
             }
 
         }
-        System.out.println("AUMENTO DI "+"con probabilità di "+prob);
 
     }
 

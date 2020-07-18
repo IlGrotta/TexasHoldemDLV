@@ -8,6 +8,7 @@ public class River extends State {
     public River(WebConnector connector, WebProbability888 probability) {
         super(connector, probability);
         stati="river";
+        changeprogram();
     }
 
 
