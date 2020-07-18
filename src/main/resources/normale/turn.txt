@@ -18,7 +18,7 @@ scelta(X)|notScelta(X):- decisione(X).
 :-scelta(X),X=call,avversari(Y),Y=1,probabilitaVittoria(Z),Z<40.
 :-scelta(X),X=call,avversari(Y),Y=2,probabilitaVittoria(Z),Z<25.
 :-scelta(X),X=call,avversari(Y),Y=3,probabilitaVittoria(Z),Z<15.
-:-scelta(X),X=call,avversari(Y),Y=4,probabilitaVittoria(Z),Z<10.
+:-scelta(X),X=call,avversari(Y),Y=4,probabilitaVittoria(Z),Z <10.
 
 %altri giocatori raise
 

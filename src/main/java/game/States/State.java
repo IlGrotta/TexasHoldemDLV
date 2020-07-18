@@ -53,7 +53,7 @@ public abstract class State {
         callCost=driver.getCallCost();
         choiseAvversari=driver.getChoices();
         numPlayer=driver.setNumPlayers()-1;
-
+        System.out.println(numPlayer);
         playerWithNoChoice=driver.playerWithNoChoice();
         prob=getProbabilityWin();
         System.out.println("TEST 2");
@@ -98,7 +98,9 @@ public abstract class State {
                 driver.scrollBar(howmuch);
                 driver.Call();
             }
+
         }
+        System.out.println("AUMENTO DI "+"con probabilità di "+prob);
 
     }
 
