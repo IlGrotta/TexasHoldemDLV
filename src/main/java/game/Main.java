@@ -75,12 +75,5 @@ public class Main {
 
         return true;
     }
-     /*
-            WebElement slider= (driver.findElement(By.xpath("//div[@class='slider-handles']/div")));
-            Actions move=new Actions(driver);
-            Action action=(Action) move.dragAndDropBy(slider,300    ,0).build();
-            action.perform();
-            Thread.sleep(2000);
-            driver.findElement(By.xpath("//button[@class='action-button']")).click();
-            Thread.sleep(200);*/
+
 }

@@ -3,7 +3,7 @@ package dlv;
 import it.unical.mat.embasp.base.InputProgram;
 import it.unical.mat.embasp.languages.asp.ASPInputProgram;
 
-public class DlvProfiling extends DlvHandler{
+public class    DlvProfiling extends DlvHandler{
     public void setBudget(Budget budget){
         InputProgram facts=new ASPInputProgram();
         try{

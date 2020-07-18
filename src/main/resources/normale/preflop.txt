@@ -15,17 +15,17 @@ scelta(X)|notScelta(X):- decisione(X).
 
 %altri giocatori call
 
-:-scelta(X),X=call,avversari(Y),Y=1,probabilitaVittoria(Z),Z<48.
-:-scelta(X),X=call,avversari(Y),Y=2,probabilitaVittoria(Z),Z<31.
-:-scelta(X),X=call,avversari(Y),Y=3,probabilitaVittoria(Z),Z<21.
-:-scelta(X),X=call,avversari(Y),Y=4,probabilitaVittoria(Z),Z<17.
+:-scelta(X),X=call,avversari(Y),Y=1,probabilitaVittoria(Z),Z<48,puntataMinima(K),K!=0.
+:-scelta(X),X=call,avversari(Y),Y=2,probabilitaVittoria(Z),Z<31,puntataMinima(K),K!=0.
+:-scelta(X),X=call,avversari(Y),Y=3,probabilitaVittoria(Z),Z<21,puntataMinima(K),K!=0.
+:-scelta(X),X=call,avversari(Y),Y=4,probabilitaVittoria(Z),Z<17,puntataMinima(K),K!=0.
 
 %altri giocatori raise
 
-:-scelta(X),X=raise,avversari(Y),Y=1,probabilitaVittoria(Z),Z<65.
-:-scelta(X),X=raise,avversari(Y),Y=2,probabilitaVittoria(Z),Z<50.
-:-scelta(X),X=raise,avversari(Y),Y=3,probabilitaVittoria(Z),Z<38.
-:-scelta(X),X=raise,avversari(Y),Y=4,probabilitaVittoria(Z),Z<30.
+:-scelta(X),X=raise,avversari(Y),Y=1,probabilitaVittoria(Z),Z<65,puntataMinima(K),K!=0.
+:-scelta(X),X=raise,avversari(Y),Y=2,probabilitaVittoria(Z),Z<50,puntataMinima(K),K!=0.
+:-scelta(X),X=raise,avversari(Y),Y=3,probabilitaVittoria(Z),Z<38,puntataMinima(K),K!=0.
+:-scelta(X),X=raise,avversari(Y),Y=4,probabilitaVittoria(Z),Z<30,puntataMinima(K),K!=0.
 
 %se la scelta non e raise  pago prob@2 per ogni X ma  prob deve essere maggiore del 60
 :~notScelta(X),X=raise,avversari(Y),Y=1,probabilitaVittoria(Z),Z>=65.[Z@1,X]
