@@ -10,7 +10,7 @@ scelta(X)|notScelta(X):- decisione(X).
 :-scelta(fold),puntataMinima(X),X=0.
 
 %non e possibile che la scelta sia raise se puntata minima=Budget
-:-scelta(raise),puntataMinima(X),budget(X).
+:-scelta(raise),puntataMinima(X),budget(Y),X>=Y.
 
 %altri giocatori call
 
@@ -32,10 +32,10 @@ scelta(X)|notScelta(X):- decisione(X).
 :-notScelta(X),X=fold,avversari(Y),Y=4,#count{X:sceltaAvversario(X,raise)}>=1,probabilitaVittoria(Z),Z<19.
 
 %se la scelta non e raise  pago prob@1 per ogni X ma  prob deve essere maggiore del 60
-:~notScelta(X),X=raise,avversari(Y),Y=1,probabilitaVittoria(Z),Z>=55.[Z@1,X]
-:~notScelta(X),X=raise,avversari(Y),Y=2,probabilitaVittoria(Z),Z>=40.[Z@1,X]
-:~notScelta(X),X=raise,avversari(Y),Y=3,probabilitaVittoria(Z),Z>=28.[Z@1,X]
-:~notScelta(X),X=raise,avversari(Y),Y=4,probabilitaVittoria(Z),Z>=20.[Z@1,X]
+:~notScelta(X),X=raise,avversari(Y),Y=1,probabilitaVittoria(Z),Z>=55,K=Z+8.[K@1,X]
+:~notScelta(X),X=raise,avversari(Y),Y=2,probabilitaVittoria(Z),Z>=40,K=Z+8.[K@1,X]
+:~notScelta(X),X=raise,avversari(Y),Y=3,probabilitaVittoria(Z),Z>=28,K=Z+8.[K@1,X]
+:~notScelta(X),X=raise,avversari(Y),Y=4,probabilitaVittoria(Z),Z>=20,K=Z+8.[K@1,X]
 
 %se la scelta non e call pago 1@1 per ogni X
 :~notScelta(X),X=call,avversari(Y),Y=1.[60@1,X]

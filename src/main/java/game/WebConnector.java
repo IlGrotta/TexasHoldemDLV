@@ -99,9 +99,9 @@ public class WebConnector {
     }
 
     private Card funcToTakeCArd(Card card, String card1) {
-        System.out.println("mi sono bloccato con carta"+card1);
+        //System.out.println("mi sono bloccato con carta"+card1);
         String Number=card1.substring(0,card1.length()-2);
-        System.out.println("mi sono bloccato con carta"+card1+Number);
+      //  System.out.println("mi sono bloccato con carta"+card1+Number);
 
         Integer num=null;
         if(Number.equals("J")||Number.equals("Q")||Number.equals("K")||Number.equals("A")){
@@ -184,12 +184,11 @@ public class WebConnector {
     }
 
     public void clickNextTurn(){
-
         WebDriverWait wait = new WebDriverWait(driver, 20);
         WebElement element = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//button[@class='showdown--nextRound--button']"))  ));
          element = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//button[@class='showdown--nextRound--button']"))  ));
          try {
-             Thread.sleep(500);
+             Thread.sleep(3000);
          }
          catch (Exception e){
              e.printStackTrace();
@@ -294,7 +293,7 @@ public class WebConnector {
             String pathPlayer="player-entity--wrapper p"+i;
             if(driver.findElements(By.xpath("//div[@class='"+pathPlayer+"']/div")).size()!=0) {
                 String choice = driver.findElement(By.xpath("//div[@class='" + pathPlayer + "']/div")).getText();
-                System.out.println("La scelta di " + i + " è: " + choice);
+                //System.out.println("La scelta di " + i + " è: " + choice);
                 if (choice == null)
                     choices.put(i, "null");
                 else {

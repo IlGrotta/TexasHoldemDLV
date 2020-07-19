@@ -48,14 +48,14 @@ public abstract class State {
         takeCards();
         //todo Profiling se vogliamo farlo
         budget=driver.getPlayerBudget();
-        System.out.println(budget);
+      //  System.out.println(budget);
         callCost=driver.getCallCost();
         choiseAvversari=driver.getChoices();
         numPlayer=driver.setNumPlayers()-1;
-        System.out.println("stato di gioco"+stati);
+       // System.out.println("stato di gioco"+stati);
         playerWithNoChoice=driver.playerWithNoChoice();
         prob=getProbabilityWin();
-        System.out.println("TEST 2");
+       // System.out.println("TEST 2");
         choicePlayer=DlvChoice();
 
         System.out.println("Il player ha scelto : "+choicePlayer);
@@ -63,13 +63,13 @@ public abstract class State {
 
         System.out.println("TEST 3");
         if(choicePlayer.equals("fold")) {
-            System.out.println("probabilità di "+prob);
+          //  System.out.println("probabilità di "+prob);
             driver.Fold();
 
         }
         if(choicePlayer.equals("call")) {
             int howmuch=0;
-                System.out.println("AUMENTO DI "+howmuch +"con probabilità di "+prob);
+             //   System.out.println("AUMENTO DI "+howmuch +"con probabilità di "+prob);
             driver.scrollBar(howmuch);
             driver.Call();
 
@@ -93,7 +93,7 @@ public abstract class State {
                 if (prob >= 86 && prob <= 100)
                     howmuch = 800 ;
 
-                System.out.println("AUMENTO DI "+howmuch +"con probabilità di "+prob);
+              //  System.out.println("AUMENTO DI "+howmuch +"con probabilità di "+prob);
                 driver.scrollBar(howmuch);
                 driver.Call();
             }
@@ -106,6 +106,7 @@ public abstract class State {
         firstCardPlayer=driver.getFirstCard();
         secondCardPlayer=driver.getSecondCard();
         communitycards=driver.getCards();
+        System.out.println(communitycards);
     }
     protected int getProbabilityWin(){
 
@@ -126,18 +127,18 @@ public abstract class State {
         */
         int playersNotFold=driver.playerWithNoChoice()+driver.numPlayerWithChoice();
         int player888=probability.numberPlayer888table();
-        System.out.println("Player not fold: "+playersNotFold);
-        System.out.println("Player senza scelta: "+driver.playerWithNoChoice());
-        System.out.println("Player con scelta: "+driver.numPlayerWithChoice());
-        System.out.println("Giocatori al tavolo: "+player888);
+       // System.out.println("Player not fold: "+playersNotFold);
+        //System.out.println("Player senza scelta: "+driver.playerWithNoChoice());
+        //System.out.println("Player con scelta: "+driver.numPlayerWithChoice());
+        //System.out.println("Giocatori al tavolo: "+player888);
         while(player888<playersNotFold-1){
-            System.out.println("Ho aggiunto!");
+          //  System.out.println("Ho aggiunto!");
             //finchè bisogna aggiugnere al tavolo
             probability.setAvversario(player888);
             player888=probability.numberPlayer888table();
         }
         while(player888>playersNotFold){
-            System.out.println("Ho rimosso!");
+            //System.out.println("Ho rimosso!");
             //finchè bisogna rimuovere dal tavolo
             probability.deletefirst();
             player888=probability.numberPlayer888table();
@@ -162,6 +163,7 @@ public abstract class State {
 
         dlv.setBudget(new Budget(budget));
         dlv.setChanceWin(new ProbabilitaVittoria(prob));
+        System.out.println("la prob è :"+prob);
         dlv.setNumeroAvversari(new numeroAvversari(numPlayer));
         dlv.puntataMinima(new puntataMinima(callCost));
         // dlv.setSceltaAvversario(sceltaAvversario);
