@@ -84,6 +84,7 @@ public class WebConnector {
             }
             i+=1;
         }while (!notexist);
+        System.out.println("le carte che ritorna il metodo getcards sono "+cards);
         return cards;
     }
     public Card getFirstCard()
@@ -224,8 +225,9 @@ public class WebConnector {
 
 
         }
-
         ArrayList<Card> cards=getCards();
+        System.out.println("carte in gioco"+cards.size());
+
         if(cards.size()==0)
             return State.StateType.PREFLOP;
         if(cards.size()==3)
