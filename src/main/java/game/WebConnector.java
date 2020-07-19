@@ -177,7 +177,7 @@ public class WebConnector {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[2]/div[1]/button[2]")).click();
     }
 
-    // TODO: 13/07/2020 possibile errore ad esempio se execute chiama call ma non trova l'elemento perchè ad esempio e all va in loop 
+    // TODO: 13/07/2020 possibile errore ad esempio se execute chiama call ma non trova l'elemento perchè ad esempio e all va in loop
     public void Call()
     {
         driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[2]/div[1]/button[1]")).click();
@@ -372,4 +372,30 @@ public class WebConnector {
     }
 
 
+
+    public int avversariEffettivamenteinGioco(){
+        int cont=0;
+        for(int i=1;i<5;i++) {
+            if(avversarioInGioco(i))
+                cont++;
+
+        }
+
+        return cont;
+    }
+
+
+    boolean avversarioInGioco(int i){
+        if(driver.findElements(By.xpath("//div[@class='player-entity--wrapper p"+i+"']")).size()!=0  ){
+            if(driver.findElements(By.xpath("//div[@class='player-entity--wrapper p"+i+"']/div[2]/div[@class=playing-card cardIn robotcard folded")).size()!=0)
+                return  true;
+            else
+                return false;
+        }
+
+        else
+            return false;
+
+
+    }
 }
