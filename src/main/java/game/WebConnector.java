@@ -51,12 +51,14 @@ public class WebConnector {
 
         return Integer.parseInt((driver.findElement(By.xpath("//div[@class='pot-container']/h4")).getText()));
     }
+
+    /*
     public ArrayList<Card> getCards()
     {
         ArrayList<Card> cards=new ArrayList<Card>();
         while(!myTurn()){
-            //ONLY FIRST TIME; SO THE GAME IS LOADED! TODO A BETTER SOLUTION
-        }
+        //ONLY FIRST TIME; SO THE GAME IS LOADED! TODO A BETTER SOLUTION
+    }
         boolean notexist=Boolean.FALSE;
         int i=1;
         do {
@@ -85,6 +87,35 @@ public class WebConnector {
             i+=1;
         }while (!notexist);
         System.out.println("le carte che ritorna il metodo getcards sono "+cards);
+        return cards;
+    }
+
+
+
+     */
+
+    public ArrayList<Card> getCards(){
+        ArrayList<Card> cards=new ArrayList<Card>();
+        boolean notexist=false;
+        int i=1;
+        while(!notexist){
+            if(driver.findElements(By.xpath("//div[@class='community-card-container']/div["+i+"]")).size()!=0 ){
+                String stringacarta=driver.findElement(By.xpath("//div[@class='community-card-container']/div["+i+"]")).getText();
+
+                while (stringacarta.equals("") || stringacarta==null){
+                     stringacarta=driver.findElement(By.xpath("//div[@class='community-card-container']/div["+i+"]")).getText();
+
+                }
+                Card card=null;
+
+                card=funcToTakeCArd(card,stringacarta);
+                cards.add(card);
+                i++;
+            }
+            else{
+                notexist=true;
+            }
+        }
         return cards;
     }
     public Card getFirstCard()
@@ -345,6 +376,7 @@ public class WebConnector {
 
     public boolean gameEnded(){
         String thePlayer=null;
+        setNumPlayers();
         for(int i=0;i<numPlayers;i++){
             String pathPlayer="player-entity--wrapper p"+i;
             if(driver.findElement(By.xpath("//div[@class='"+pathPlayer+"']/div[3]/div/h5" )).getText().equals("Player 1")  ){
@@ -353,7 +385,7 @@ public class WebConnector {
         }
 
         //se finiamo il budget
-        if(driver.findElement(By.xpath("//div[@class='"+thePlayer+"']/div[3]/div/div/h5")).getText().equals("0")  ){
+        if(driver.  findElement(By.xpath("//div[@class='"+thePlayer+"']/div[3]/div/div/h5")).getText().equals("0")  ){
             return  true;
         }
 
@@ -367,10 +399,7 @@ public class WebConnector {
             }
         }
 
-        if(cont>0)
-            return false;
-
-        return true;
+        return cont <= 0;
     }
 
 
@@ -379,7 +408,10 @@ public class WebConnector {
         int cont=0;
         for(int i=1;i<5;i++) {
             if(avversarioInGioco(i))
+            {
+                System.out.println("Avversario "+i+" è in gioco");
                 cont++;
+            }
 
         }
 
@@ -387,12 +419,10 @@ public class WebConnector {
     }
 
 
-    boolean avversarioInGioco(int i){
+    boolean avversarioInGioco(int i) {
         if(driver.findElements(By.xpath("//div[@class='player-entity--wrapper p"+i+"']")).size()!=0  ){
-            if(driver.findElements(By.xpath("//div[@class='player-entity--wrapper p"+i+"']/div[2]/div[@class=playing-card cardIn robotcard folded")).size()!=0)
-                return  true;
-            else
-                return false;
+           // System.out.println("mano giocatore "+i) ;
+            return driver.findElements(By.xpath("//div[@class='player-entity--wrapper p" + i + "']/div[2]/div[@class='playing-card cardIn robotcard folded']")).size() == 0;
         }
 
         else

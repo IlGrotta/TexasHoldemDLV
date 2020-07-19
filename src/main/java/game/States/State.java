@@ -55,15 +55,10 @@ public abstract class State {
        // System.out.println("stato di gioco"+stati);
         playerWithNoChoice=driver.playerWithNoChoice();
         prob=getProbabilityWin();
-       // System.out.println("TEST 2");
+        System.out.println("TEST 2");
         choicePlayer=DlvChoice();
         System.out.println("Stato attuale:" +
                 " callCost= "+callCost+" , numPlayers= "+numPlayer+" probabilita: "+prob);
-        System.out.println("Scelte= ");
-
-        for (Map.Entry<Integer, String> entry : choiseAvversari.entrySet()) {
-            System.out.println(entry.getKey() + "/" + entry.getValue());
-        }
 
         System.out.println("Il player ha scelto : "+choicePlayer);
 
@@ -132,6 +127,7 @@ public abstract class State {
         int p=probability.GetProbabilityVictory();
         probability.resetTable();
         */
+        driver.setNumPlayers();
         int playersNotFold=driver.playerWithNoChoice()+driver.numPlayerWithChoice();
         int player888=probability.numberPlayer888table();
        // System.out.println("Player not fold: "+playersNotFold);
