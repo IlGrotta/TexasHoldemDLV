@@ -182,7 +182,7 @@ public abstract class State {
         return result;
     }
     protected void changeprogram(){
-        dlv.setProgram("src/main/resources/normale/"+stati+".txt");
+        dlv.setProgram("src/main/resources/furioso/"+stati+".txt");
     }
     public enum StateType{PREFLOP, FLOP, TURN, RIVER, ENDMATCH, LOSEALL, ERROR}
 

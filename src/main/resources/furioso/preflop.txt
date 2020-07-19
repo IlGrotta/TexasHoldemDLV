@@ -2,39 +2,50 @@ decisione(fold). decisione(call). decisione(raise).
 
 scelta(X)|notScelta(X):- decisione(X).
 
+%configurazione giocatore singolo
 %solo una scelta per volta
 :- not #count{X:scelta(X)}=1.
-
-%non e possibile che la scelta non sia fold se la puntata minima è maggiore del budget e la prob e minore del 65.
-:- notScelta(fold),puntataMinima(X),budget(Y),X>Y,probabilitaVittoria(Z),Z<65.
-
-%non e possibile che la scelta non sia call se la puntata minima è maggiore del budget e la prob e maggiore o uguale  del 65 .
-:- notScelta(call),puntataMinima(X),budget(Y),X>Y,probabilitaVittoria(Z),Z>=65.
 
 %non e possibile che la scelta  sia fold  se la puntata minima e 0
 :-scelta(fold),puntataMinima(X),X=0.
 
-%non e possibile che la scelta non sia fold se più di un avversario fa raise e la probabilità di vittoria e minore del 60
-:- notScelta(fold),#count{X:sceltaAvversario(X,raise)}>1,probabilitaVittoria(Z),Z<=60.
-
-%non e possibile che la scelta non sia call se più di un avversario fa raise e la probabilità di vittoria e maggiore  del 60 e minore del 90
-:- notScelta(call),#count{X:sceltaAvversario(X,raise)}>1,probabilitaVittoria(Z),Z>60,Z<90.
-
-%non e possibile che la scelta non sia raise se più di un avversario fa raise e la probabilità di vittoria e maggiore del 90
-:- notScelta(raise),#count{X:sceltaAvversario(X,raise)}>1,probabilitaVittoria(Z),Z>90.
-
 %non e possibile che la scelta sia raise se puntata minima=Budget
 :-scelta(raise),puntataMinima(X),budget(X).
 
+%altri giocatori call
 
-%non e possibile che la scelta non sia raise se tutti hanno fatto call e le probabilità vittoria e maggiore del 40
-:-notScelta(raise),avversari(N),#count{X:sceltaAvversario(X,call)}=N,probabilitaVittoria(Z),Z>40.
+:-scelta(X),X=call,avversari(Y),Y=1,probabilitaVittoria(Z),Z<48,puntataMinima(K),K!=0.
+:-scelta(X),X=call,avversari(Y),Y=2,probabilitaVittoria(Z),Z<31,puntataMinima(K),K!=0.
+:-scelta(X),X=call,avversari(Y),Y=3,probabilitaVittoria(Z),Z<21,puntataMinima(K),K!=0.
+:-scelta(X),X=call,avversari(Y),Y=4,probabilitaVittoria(Z),Z<17,puntataMinima(K),K!=0.
 
-%se la scelta non e raise  pago prob@2 ma prob deve essere maggiore di 15
-:~notScelta(X),X=raise,probabilitaVittoria(Z),Z>15.[Z@2,X]
+%altri giocatori raise
 
-%se la scelta non e call pago
-:~notScelta(X),X=call.[60@1,X]
+:-scelta(X),X=raise,avversari(Y),Y=1,probabilitaVittoria(Z),Z<55,puntataMinima(K),K!=0.
+:-scelta(X),X=raise,avversari(Y),Y=2,probabilitaVittoria(Z),Z<40,puntataMinima(K),K!=0.
+:-scelta(X),X=raise,avversari(Y),Y=3,probabilitaVittoria(Z),Z<28,puntataMinima(K),K!=0.
+:-scelta(X),X=raise,avversari(Y),Y=4,probabilitaVittoria(Z),Z<20,puntataMinima(K),K!=0.
 
-%se noi non scegliamo fold paghiamo 50.
-:~notScelta(X),X=fold,probabilitaVittoria(Z).[50@1,X]
+:-notScelta(X),X=fold,avversari(Y),Y=1,#count{X:sceltaAvversario(X,raise)}=1,probabilitaVittoria(Z),Z<50.
+:-notScelta(X),X=fold,avversari(Y),Y=2,#count{X:sceltaAvversario(X,raise)}>=1,probabilitaVittoria(Z),Z<33.
+:-notScelta(X),X=fold,avversari(Y),Y=3,#count{X:sceltaAvversario(X,raise)}>=1,probabilitaVittoria(Z),Z<25.
+:-notScelta(X),X=fold,avversari(Y),Y=4,#count{X:sceltaAvversario(X,raise)}>=1,probabilitaVittoria(Z),Z<19.
+
+%se la scelta non e raise  pago prob@1 per ogni X ma  prob deve essere maggiore del 60
+:~notScelta(X),X=raise,avversari(Y),Y=1,probabilitaVittoria(Z),Z>=55.[Z@1,X]
+:~notScelta(X),X=raise,avversari(Y),Y=2,probabilitaVittoria(Z),Z>=40.[Z@1,X]
+:~notScelta(X),X=raise,avversari(Y),Y=3,probabilitaVittoria(Z),Z>=28.[Z@1,X]
+:~notScelta(X),X=raise,avversari(Y),Y=4,probabilitaVittoria(Z),Z>=20.[Z@1,X]
+
+%se la scelta non e call pago 1@1 per ogni X
+:~notScelta(X),X=call,avversari(Y),Y=1.[60@1,X]
+:~notScelta(X),X=call,avversari(Y),Y=2.[50@1,X]
+:~notScelta(X),X=call,avversari(Y),Y=3.[35@1,X]
+:~notScelta(X),X=call,avversari(Y),Y=4.[28@1,X]
+
+%se noi scegliamo fold paghiamo per la probabilita di perdità.
+:~notScelta(X),X=fold,avversari(Y),Y=1,probabilitaVittoria(Z),P=86-Z.[P@1,X]
+:~notScelta(X),X=fold,avversari(Y),Y=2,probabilitaVittoria(Z),P=75-Z.[P@1,X]
+:~notScelta(X),X=fold,avversari(Y),Y=3,probabilitaVittoria(Z),P=64-Z.[P@1,X]
+:~notScelta(X),X=fold,avversari(Y),Y=4,probabilitaVittoria(Z),P=56-Z.[P@1,X]
+
