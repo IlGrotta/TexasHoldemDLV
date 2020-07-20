@@ -45,9 +45,8 @@ public abstract class State {
     }
 
     public void execute(){
-        System.out.println("TEST 1");
+        //System.out.println("TEST 1");
         takeCards();
-        //todo Profiling se vogliamo farlo
         budget=driver.getPlayerBudget();
       //  System.out.println(budget);
         callCost=driver.getCallCost();
@@ -56,15 +55,15 @@ public abstract class State {
        // System.out.println("stato di gioco"+stati);
         playerWithNoChoice=driver.playerWithNoChoice();
         prob=getProbabilityWin();
-        System.out.println("TEST 2");
+       // System.out.println("TEST 2");
         choicePlayer=DlvChoice();
         System.out.println("Stato attuale:" +
                 " callCost= "+callCost+" , numPlayers= "+numPlayer+" probabilita: "+prob);
-
+        System.out.println(firstCardPlayer+"  "+secondCardPlayer);
         System.out.println("Il player ha scelto : "+choicePlayer);
 
 
-        System.out.println("TEST 3");
+     //   System.out.println("TEST 3");
         if(choicePlayer.equals("fold")) {
           //  System.out.println("probabilità di "+prob);
             driver.Fold();
@@ -177,12 +176,15 @@ public abstract class State {
         return result;
     }
     protected void changemodalita(){
-        System.out.println("budget"+budget);
+
         dlvProfiling=new DlvProfiling();
+        budget=driver.getPlayerBudget();
         dlvProfiling.setBudget(new Budget(budget));
+
         dlvProfiling.setProgram("src/main/resources/profiling.txt");
 
         Profiling=dlvProfiling.runProgram1();
+        System.out.println("Il profiling è "+Profiling);
 
     }
     protected void changeprogram(){

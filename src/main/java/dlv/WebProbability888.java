@@ -28,7 +28,7 @@ public class WebProbability888 {
     }
     public void setAvversario(int N)//l'avversario rientra nel turno attuale
     {
-        System.out.println("HO settato "+N);
+       // System.out.println("HO settato "+N);
         int player=N+2;
         driver.findElement(By.xpath("//*[@id=\"player-listing\"]/div["+String.valueOf(player)+"]/div[3]/p")).click();
         cont++;

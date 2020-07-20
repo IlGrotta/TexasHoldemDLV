@@ -25,6 +25,8 @@ public class DlvHandler {
 
         try{
             ASPMapper.getInstance().registerClass(Scelta.class);
+            ASPMapper.getInstance().registerClass(profiling.class);
+            ASPMapper.getInstance().registerClass(Budget.class);
         }
         catch (Exception e)
         {
@@ -47,6 +49,8 @@ public class DlvHandler {
         Output o=handler.startSync();
         AnswerSets answers=(AnswerSets)o;
         System.out.println(o.getErrors());
+        System.out.println("AS"+ answers.getAnswerSetsString());
+
         int n=0;
         for(AnswerSet a: answers.getAnswersets())
         {
@@ -70,9 +74,11 @@ public class DlvHandler {
     }
     public String runProgram1()
     {
+        System.out.println("AJEJEJEJEJJEJJ");
         Output o=handler.startSync();
         AnswerSets answers=(AnswerSets)o;
         System.out.println(o.getErrors());
+        System.out.println("AS"+ answers.getAnswerSetsString());
         int n=0;
         for(AnswerSet a: answers.getAnswersets())
         {
@@ -80,10 +86,16 @@ public class DlvHandler {
             {
                 for(Object obj:a.getAtoms())
                 {
+                    System.out.println("MIAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo");
                     if(obj instanceof profiling)
                     {
+                        System.out.println("In profiling");
                         profiling s=(profiling) obj;
                         return  s.getValue();
+                    }
+
+                    if(obj instanceof Budget){
+                        System.out.println("Budget effettibo è "+ (Budget)obj);
                     }
                 }
             }

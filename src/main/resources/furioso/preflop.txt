@@ -14,7 +14,7 @@ scelta(X)|notScelta(X):- decisione(X).
 
 %altri giocatori call
 
-:-scelta(X),X=call,avversari(Y),Y=1,probabilitaVittoria(Z),Z<48,puntataMinima(K),K!=0.
+    :-scelta(X),X=call,avversari(Y),Y=1,probabilitaVittoria(Z),Z<48,puntataMinima(K),K!=0.
 :-scelta(X),X=call,avversari(Y),Y=2,probabilitaVittoria(Z),Z<31,puntataMinima(K),K!=0.
 :-scelta(X),X=call,avversari(Y),Y=3,probabilitaVittoria(Z),Z<21,puntataMinima(K),K!=0.
 :-scelta(X),X=call,avversari(Y),Y=4,probabilitaVittoria(Z),Z<17,puntataMinima(K),K!=0.
