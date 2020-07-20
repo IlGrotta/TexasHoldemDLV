@@ -178,10 +178,11 @@ public abstract class State {
     protected void changemodalita(){
 
         dlvProfiling=new DlvProfiling();
+        dlvProfiling.setProgram("src/main/resources/profiling.txt");
         budget=driver.getPlayerBudget();
         dlvProfiling.setBudget(new Budget(budget));
 
-        dlvProfiling.setProgram("src/main/resources/profiling.txt");
+
 
         Profiling=dlvProfiling.runProgram1();
         System.out.println("Il profiling è "+Profiling);
