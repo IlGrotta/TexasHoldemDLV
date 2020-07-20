@@ -172,22 +172,11 @@ public abstract class State {
         // dlv.setSceltaAvversario(sceltaAvversario);
 
 
-        //todo son sicuro le stringhe danno problemi a dlv, ora provo cosi sennò va implementato con posizioni e si gestiscono i nomi in Java!
-        for(Map.Entry<Integer, String> entry : choiseAvversari.entrySet()) {
-            Integer key = entry.getKey();
-            String value = entry.getValue();
-            if(!value.equals("null")){
-                String n=driver.getPlayerName(key);
-                dlv.setSceltaAvversario(new sceltaAvversario(n,value));
-            }
-
-        }
-
         String result=dlv.runProgram();
         return result;
     }
     protected void changeprogram(){
-        dlv.setProgram("src/main/resources/furioso/"+stati+".txt");
+        dlv.setProgram("src/main/resources/conservativo/"+stati+".txt");
     }
     public enum StateType{PREFLOP, FLOP, TURN, RIVER, ENDMATCH, LOSEALL, ERROR}
 

@@ -27,7 +27,7 @@ scelta(X)|notScelta(X):- decisione(X).
 :-scelta(X),X=raise,avversari(Y),Y=3,probabilitaVittoria(Z),Z<35,puntataMinima(K),K!=0.
 :-scelta(X),X=raise,avversari(Y),Y=4,probabilitaVittoria(Z),Z<25,puntataMinima(K),K!=0.
 
-:-notScelta(X),X=fold,avversari(Y),Y=1,#count{X:sceltaAvversario(X,raise)}=1,probabilitaVittoria(Z),Z<70.
+:-notScelta(X),X=fold,avversari(Y),Y=1,puntataMinima(K),K>300,probabilitaVittoria(Z),Z<70.
 :-notScelta(X),X=fold,avversari(Y),Y=2,#count{X:sceltaAvversario(X,raise)}>=1,probabilitaVittoria(Z),Z<53.
 :-notScelta(X),X=fold,avversari(Y),Y=3,#count{X:sceltaAvversario(X,raise)}>=1,probabilitaVittoria(Z),Z<45.
 :-notScelta(X),X=fold,avversari(Y),Y=4,#count{X:sceltaAvversario(X,raise)}>=1,probabilitaVittoria(Z),Z<39.

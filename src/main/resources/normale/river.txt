@@ -27,10 +27,10 @@ scelta(X)|notScelta(X):- decisione(X).
 :-scelta(X),X=raise,avversari(Y),Y=3,probabilitaVittoria(Z),Z<71.
 :-scelta(X),X=raise,avversari(Y),Y=4,probabilitaVittoria(Z),Z<61.
 
-:-notScelta(X),X=fold,avversari(Y),Y=1,#count{X:sceltaAvversario(X,raise)}=1,probabilitaVittoria(Z),Z<80.
-:-notScelta(X),X=fold,avversari(Y),Y=2,#count{X:sceltaAvversario(X,raise)}>=1,probabilitaVittoria(Z),Z<63.
-:-notScelta(X),X=fold,avversari(Y),Y=3,#count{X:sceltaAvversario(X,raise)}>=1,probabilitaVittoria(Z),Z<55.
-:-notScelta(X),X=fold,avversari(Y),Y=4,#count{X:sceltaAvversario(X,raise)}>=1,probabilitaVittoria(Z),Z<49.
+:-notScelta(X),X=fold,avversari(Y),Y=1,puntataMinima(K),K>300,probabilitaVittoria(Z),Z<80.
+:-notScelta(X),X=fold,avversari(Y),Y=2,puntataMinima(K),K>300,probabilitaVittoria(Z),Z<63.
+:-notScelta(X),X=fold,avversari(Y),Y=3,puntataMinima(K),K>300,probabilitaVittoria(Z),Z<55.
+:-notScelta(X),X=fold,avversari(Y),Y=4,puntataMinima(K),K>300,probabilitaVittoria(Z),Z<49.
 
 %se la scelta non e raise  pago prob@2 per ogni X ma  prob deve essere maggiore del 60
 :~notScelta(X),X=raise,avversari(Y),Y=1,probabilitaVittoria(Z),Z>=90.[Z@1,X]

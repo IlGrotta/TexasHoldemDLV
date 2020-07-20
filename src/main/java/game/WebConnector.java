@@ -220,7 +220,7 @@ public class WebConnector {
         WebElement element = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//button[@class='showdown--nextRound--button']"))  ));
          element = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//button[@class='showdown--nextRound--button']"))  ));
          try {
-             Thread.sleep(3000);
+             Thread.sleep(5000);
          }
          catch (Exception e){
              e.printStackTrace();

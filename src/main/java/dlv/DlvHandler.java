@@ -21,7 +21,7 @@ public class DlvHandler {
     public DlvHandler()
     {
         handler = new DesktopHandler(new DLV2DesktopService("src/main/resources/dlv2.exe"));
-        setProgram("src/main/resources/furioso/preflop.txt");
+        setProgram("src/main/resources/conservativo/preflop.txt");
 
         try{
             ASPMapper.getInstance().registerClass(Scelta.class);
