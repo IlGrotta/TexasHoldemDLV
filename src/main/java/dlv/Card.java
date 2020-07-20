@@ -9,6 +9,13 @@ public class Card {
         this.seed = seed;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder s=new StringBuilder("");
+        s.append("["+number+" "+seed+"] ");
+        return s.toString();
+    }
+
     public int getNumber() {
         return number;
     }
