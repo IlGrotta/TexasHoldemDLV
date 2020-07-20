@@ -87,11 +87,11 @@ public class DlvHandler {
                 for(Object obj:a.getAtoms())
                 {
                     System.out.println("MIAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo");
-                    if(obj instanceof profiling)
+                    if(obj instanceof Scelta)
                     {
                         System.out.println("In profiling");
-                        profiling s=(profiling) obj;
-                        return  s.getValue();
+                        Scelta s=(Scelta) obj;
+                        return  s.getScelta();
                     }
 
                     if(obj instanceof Budget){

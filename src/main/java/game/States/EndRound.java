@@ -11,6 +11,6 @@ public class EndRound  extends  State{
     @Override
     public void execute() {
         driver.clickNextTurn();
-        changemodalita();
+
     }
 }
