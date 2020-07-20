@@ -55,15 +55,14 @@ public abstract class State {
        // System.out.println("stato di gioco"+stati);
         playerWithNoChoice=driver.playerWithNoChoice();
         prob=getProbabilityWin();
-        System.out.println("TEST 2");
         choicePlayer=DlvChoice();
         System.out.println("Stato attuale:" +
                 " callCost= "+callCost+" , numPlayers= "+numPlayer+" probabilita: "+prob);
-
+        System.out.println(firstCardPlayer+"    "+secondCardPlayer);
         System.out.println("Il player ha scelto : "+choicePlayer);
 
 
-        System.out.println("TEST 3");
+
         if(choicePlayer.equals("fold")) {
           //  System.out.println("probabilità di "+prob);
             driver.Fold();
@@ -176,7 +175,7 @@ public abstract class State {
         return result;
     }
     protected void changeprogram(){
-        dlv.setProgram("src/main/resources/conservativo/"+stati+".txt");
+        dlv.setProgram("src/main/resources/furioso/"+stati+".txt");
     }
     public enum StateType{PREFLOP, FLOP, TURN, RIVER, ENDMATCH, LOSEALL, ERROR}
 

@@ -11,6 +11,12 @@ public class LoseAll extends State {
 
     @Override
     public void execute() {
+        //pausa per vedere se abbiamo vinto o perso prima che si chiuda il programma
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
