@@ -68,30 +68,5 @@ public class DlvHandler {
         }
         return "";
     }
-    public String runProgram1()
-    {
-        Output o=handler.startSync();
-        AnswerSets answers=(AnswerSets)o;
-        System.out.println(o.getErrors());
-        int n=0;
-        for(AnswerSet a: answers.getAnswersets())
-        {
-            try
-            {
-                for(Object obj:a.getAtoms())
-                {
-                    if(obj instanceof profiling)
-                    {
-                        profiling s=(profiling) obj;
-                        return  s.getValue();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
-        return "";
-    }
+
 }

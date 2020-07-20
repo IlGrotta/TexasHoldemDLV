@@ -179,11 +179,10 @@ public abstract class State {
     protected void changemodalita(){
         System.out.println("budget"+budget);
         dlvProfiling=new DlvProfiling();
-        dlvProfiling.setBudget(new Budget(budget));
         dlvProfiling.setProgram("src/main/resources/profiling.txt");
-
-        Profiling=dlvProfiling.runProgram1();
-
+        dlvProfiling.setBudget(new Budget(budget));
+        Profiling=dlvProfiling.runProgram();
+        System.out.println("il profiling e"+Profiling);
     }
     protected void changeprogram(){
         dlv.setProgram("src/main/resources/"+Profiling+"/"+stati+".txt");
