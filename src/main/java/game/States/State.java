@@ -33,6 +33,7 @@ public abstract class State {
     int numPlayer;
     int playerWithNoChoice;
     int prob;
+    protected String Profiling="furioso";
     int numPlayerWithChoice;
     public State(WebConnector connector, WebProbability888 probability){
         driver=connector;
@@ -175,8 +176,17 @@ public abstract class State {
         String result=dlv.runProgram();
         return result;
     }
+    protected void changemodalita(){
+        System.out.println("budget"+budget);
+        dlvProfiling=new DlvProfiling();
+        dlvProfiling.setBudget(new Budget(budget));
+        dlvProfiling.setProgram("src/main/resources/profiling.txt");
+
+        Profiling=dlvProfiling.runProgram1();
+
+    }
     protected void changeprogram(){
-        dlv.setProgram("src/main/resources/conservativo/"+stati+".txt");
+        dlv.setProgram("src/main/resources/"+Profiling+"/"+stati+".txt");
     }
     public enum StateType{PREFLOP, FLOP, TURN, RIVER, ENDMATCH, LOSEALL, ERROR}
 

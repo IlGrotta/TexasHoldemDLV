@@ -2,10 +2,10 @@ decisione(normale).
 decisione(furioso).
 decisione(conservativo).
 
-scelta(X)|notScelta(X):- decisione(X).
+profiling(X)|notProfiling(X):- decisione(X).
 
 %solo una scelta per volta
 :- not #count{X:scelta(X)}=1.
-:- notScelta(normale),budget(X),X>6000 ,X<20000.
-:-notScelta(furioso),budget(X),X>20000.
-:-notScelta(conservativo),budget(X),X<6000.
+:- notProfiling(normale),budget(X),X>=10000 ,X<=17000.
+:-notProfiling(furioso),budget(X),X>17000.
+:-notProfiling(conservativo),budget(X),X<10000.
