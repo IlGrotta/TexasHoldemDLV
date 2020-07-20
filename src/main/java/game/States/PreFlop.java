@@ -21,5 +21,6 @@ public class PreFlop extends State {
         firstCardPlayer=driver.getFirstCard();
         secondCardPlayer=driver.getSecondCard();
         communitycards=new ArrayList<>();
+        communitycards=driver.getCards();
     }
 }

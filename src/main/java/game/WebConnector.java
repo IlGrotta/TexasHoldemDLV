@@ -53,6 +53,12 @@ public class WebConnector {
     }
     public ArrayList<Card> getCards()
     {
+        try {
+            Thread.sleep(3000);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         ArrayList<Card> cards=new ArrayList<Card>();
         while(!myTurn()){
             //ONLY FIRST TIME; SO THE GAME IS LOADED! TODO A BETTER SOLUTION
@@ -374,30 +380,4 @@ public class WebConnector {
     }
 
 
-
-    public int avversariEffettivamenteinGioco(){
-        int cont=0;
-        for(int i=1;i<5;i++) {
-            if(avversarioInGioco(i))
-                cont++;
-
-        }
-
-        return cont;
-    }
-
-
-    boolean avversarioInGioco(int i){
-        if(driver.findElements(By.xpath("//div[@class='player-entity--wrapper p"+i+"']")).size()!=0  ){
-            if(driver.findElements(By.xpath("//div[@class='player-entity--wrapper p"+i+"']/div[2]/div[@class=playing-card cardIn robotcard folded")).size()!=0)
-                return  true;
-            else
-                return false;
-        }
-
-        else
-            return false;
-
-
-    }
 }

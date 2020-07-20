@@ -51,19 +51,12 @@ public abstract class State {
       //  System.out.println(budget);
         callCost=driver.getCallCost();
         choiseAvversari=driver.getChoices();
-        numPlayer=driver.avversariEffettivamenteinGioco();
+        numPlayer=driver.setNumPlayers()-1;
        // System.out.println("stato di gioco"+stati);
         playerWithNoChoice=driver.playerWithNoChoice();
         prob=getProbabilityWin();
        // System.out.println("TEST 2");
         choicePlayer=DlvChoice();
-        System.out.println("Stato attuale:" +
-                " callCost= "+callCost+" , numPlayers= "+numPlayer+" probabilita: "+prob);
-        System.out.println("Scelte= ");
-
-        for (Map.Entry<Integer, String> entry : choiseAvversari.entrySet()) {
-            System.out.println(entry.getKey() + "/" + entry.getValue());
-        }
 
         System.out.println("Il player ha scelto : "+choicePlayer);
 
