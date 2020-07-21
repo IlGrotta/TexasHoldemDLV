@@ -58,10 +58,10 @@ public abstract class State {
         prob=getProbabilityWin();
        // System.out.println("TEST 2");
         choicePlayer=DlvChoice();
-        System.out.println("Stato attuale:" +
-                " callCost= "+callCost+" , numPlayers= "+numPlayer+" probabilita: "+prob);
-        System.out.println(firstCardPlayer+"  "+secondCardPlayer);
-        System.out.println("Il player ha scelto : "+choicePlayer);
+       // System.out.println("Stato attuale:" +
+                //" callCost= "+callCost+" , numPlayers= "+numPlayer+" probabilita: "+prob);
+       // System.out.println(firstCardPlayer+"  "+secondCardPlayer);
+       // System.out.println("Il player ha scelto : "+choicePlayer);
 
 
      //   System.out.println("TEST 3");
@@ -109,7 +109,7 @@ public abstract class State {
         firstCardPlayer=driver.getFirstCard();
         secondCardPlayer=driver.getSecondCard();
         communitycards=driver.getCards();
-        System.out.println(communitycards);
+       // System.out.println(communitycards);
     }
     protected int getProbabilityWin(){
 
@@ -167,7 +167,7 @@ public abstract class State {
 
         dlv.setBudget(new Budget(budget));
         dlv.setChanceWin(new ProbabilitaVittoria(prob));
-        System.out.println("la prob è :"+prob);
+      //  System.out.println("la prob è :"+prob);
         dlv.setNumeroAvversari(new numeroAvversari(numPlayer));
         dlv.puntataMinima(new puntataMinima(callCost));
         // dlv.setSceltaAvversario(sceltaAvversario);
@@ -186,11 +186,11 @@ public abstract class State {
 
 
         Profiling=dlvProfiling.runProgram1();
-        System.out.println("Il profiling è "+Profiling);
+       // System.out.println("Il profiling è "+Profiling);
 
     }
     protected void changeprogram(){
-        System.out.println("Il profiling è "+Profiling);
+        //System.out.println("Il profiling è "+Profiling);
         dlv.setProgram("src/main/resources/"+Profiling+"/"+stati+".txt");
     }
     public enum StateType{PREFLOP, FLOP, TURN, RIVER, ENDMATCH, LOSEALL, ERROR}

@@ -192,7 +192,7 @@ public class WebConnector {
                 card1=(driver.findElement(By.xpath("//div[@class='player-entity--wrapper p0']/div[2]/div[2]/h6")).getText());
         }while (card1==null || card1.equals(""));
 
-        System.out.println("AAAAAAAAAAA"+card1);
+       // System.out.println("AAAAAAAAAAA"+card1);
         return funcToTakeCArd(card, card1);
     }
 
@@ -257,7 +257,7 @@ public class WebConnector {
 
         }
         ArrayList<Card> cards=getCards();
-        System.out.println("carte in gioco"+cards.size());
+       // System.out.println("carte in gioco"+cards.size());
 
         if(cards.size()==0)
             return State.StateType.PREFLOP;
@@ -409,7 +409,7 @@ public class WebConnector {
         for(int i=1;i<5;i++) {
             if(avversarioInGioco(i))
             {
-                System.out.println("Avversario "+i+" è in gioco");
+               // System.out.println("Avversario "+i+" è in gioco");
                 cont++;
             }
 

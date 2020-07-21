@@ -43,7 +43,7 @@ public class Main {
 
     static boolean setState(WebConnector web, WebProbability888 prob){
         State.StateType s= web.getActualStateOfTheGame();
-        System.out.println("State  Attuale: "+s);
+      //  System.out.println("State  Attuale: "+s);
         switch (s){
             case PREFLOP:
                 state=new PreFlop(web,prob);
@@ -64,7 +64,7 @@ public class Main {
                 state=new LoseAll(web,prob);
                 break;
             case ERROR:
-                System.out.println("ERRORE NELLO STATE");
+               // System.out.println("ERRORE NELLO STATE");
                 web.closeWeb();
                 prob.closeWeb();
                 return false;
