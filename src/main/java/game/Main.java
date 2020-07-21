@@ -43,7 +43,7 @@ public class Main {
 
     static boolean setState(WebConnector web, WebProbability888 prob){
         State.StateType s= web.getActualStateOfTheGame();
-        System.out.println("State  Attuale: "+s);
+       // System.out.println("State  Attuale: "+s);
         switch (s){
             case PREFLOP:
                 state=new PreFlop(web,prob);
